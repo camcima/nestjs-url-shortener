@@ -1,0 +1,53 @@
+{
+  "include": ["./src", "./tests"],
+  "compilerOptions": {
+    "noEmit": true,
+
+    "baseUrl": ".",
+    "rootDir": ".",
+
+    "declaration": true,
+    "importHelpers": true,
+    "noEmitHelpers": true,
+    "removeComments": true,
+    "sourceMap": true,
+
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+
+    "strictNullChecks": true,
+    "strictPropertyInitialization": false,
+    "strictBindCallApply": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": false,
+    "noImplicitThis": true,
+    "noImplicitReturns": false,
+    "noUncheckedIndexedAccess": false,
+    "resolveJsonModule": true,
+    "useUnknownInCatchVariables": true,
+    "forceConsistentCasingInFileNames": true,
+
+    "exactOptionalPropertyTypes": false,
+
+    "allowJs": false,
+    "checkJs": false,
+    "importsNotUsedAsValues": "remove",
+    "incremental": false,
+    "skipLibCheck": true,
+    "types": ["node"],
+
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "target": "esnext",
+
+    "verbatimModuleSyntax": true,
+    "allowImportingTsExtensions": true,
+    "rewriteRelativeImportExtensions": true,
+    "erasableSyntaxOnly": true,
+
+    "preserveWatchOutput": false
+  }
+}
