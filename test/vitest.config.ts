@@ -1,21 +1,21 @@
-import { mergeConfig } from 'vite'
-import { configDefaults, defineConfig } from 'vitest/config'
+import { mergeConfig } from 'vite';
+import { configDefaults, defineConfig } from 'vitest/config';
 
 export default mergeConfig(
   configDefaults,
   defineConfig({
     test: {
-      dir: 'tests',
+      dir: 'test',
       include: ['**/*.spec.ts'],
 
-      globals: false,
+      globals: true,
 
       environment: 'node',
       logHeapUsage: true,
       passWithNoTests: true,
       reporters: ['verbose'],
       typecheck: {
-        // ignoreSourceErrors: true,
+        ignoreSourceErrors: true,
       },
       coverage: {
         provider: 'v8',
@@ -25,4 +25,4 @@ export default mergeConfig(
       },
     },
   }),
-)
+);

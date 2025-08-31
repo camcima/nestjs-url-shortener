@@ -60,6 +60,9 @@
         "useNodejsImportProtocol": "info",
         "noEnum": "off",
         "useConst": "error"
+      },
+      "complexity": {
+        "recommended": false
       }
     }
   },
@@ -67,7 +70,7 @@
     "formatter": {
       "enabled": true,
       "quoteStyle": "single",
-      "semicolons": "asNeeded",
+      "semicolons": "always",
       "arrowParentheses": "always",
       "lineWidth": 80,
       "indentWidth": 2,

@@ -1,5 +1,5 @@
 {
-  "include": ["./src", "./tests"],
+  "include": ["./src", "./test"],
   "compilerOptions": {
     "noEmit": true,
 
@@ -37,7 +37,7 @@
     "importsNotUsedAsValues": "remove",
     "incremental": false,
     "skipLibCheck": true,
-    "types": ["node"],
+    "types": ["node", "vitest/globals"],
 
     "module": "nodenext",
     "moduleResolution": "nodenext",
@@ -46,7 +46,7 @@
     "verbatimModuleSyntax": true,
     "allowImportingTsExtensions": true,
     "rewriteRelativeImportExtensions": true,
-    "erasableSyntaxOnly": true,
+    "erasableSyntaxOnly": false,
 
     "preserveWatchOutput": false
   }
