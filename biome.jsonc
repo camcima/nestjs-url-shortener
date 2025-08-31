@@ -45,6 +45,7 @@
       },
       "correctness": {
         "noUnusedVariables": "warn",
+        "noUnusedFunctionParameters": "off", // due to NestJS decorators
         "useImportExtensions": {
           "fix": "safe",
           "level": "error",
@@ -67,6 +68,9 @@
     }
   },
   "javascript": {
+    "parser": {
+      "unsafeParameterDecoratorsEnabled": true // due to NestJS decorators
+    },
     "formatter": {
       "enabled": true,
       "quoteStyle": "single",
