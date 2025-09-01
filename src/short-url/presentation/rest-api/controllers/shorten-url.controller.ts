@@ -3,6 +3,7 @@ import {
   ApiBadRequestResponse,
   ApiCreatedResponse,
   ApiUnauthorizedResponse,
+  ApiUnprocessableEntityResponse,
 } from '@nestjs/swagger';
 
 import { ShortenUrlUseCase } from '../../../application/use-cases/shorten-url.use-case.ts';
@@ -21,6 +22,7 @@ export class ShortenUrlController {
   @ApiCreatedResponse({
     type: ShortUrlReadDTO,
   })
+  @ApiUnprocessableEntityResponse()
   async shortenUrl(@Body() body: ShortenUrlDTO): Promise<ShortUrlReadDTO> {
     const shortenUrlUseCaseOutput = await this.shortenUrlUseCase.execute(
       ShortenUrlRestApiToApplicationMapper.fromShortenUrlDTO(body),

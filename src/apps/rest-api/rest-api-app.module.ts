@@ -4,8 +4,9 @@ import {
   type NestModule,
   ValidationPipe,
 } from '@nestjs/common';
-import { APP_PIPE } from '@nestjs/core';
+import { APP_FILTER, APP_PIPE } from '@nestjs/core';
 
+import { CatchAllExecptions } from '../../shared/presentation/rest-api/middlewares/catch-all-exceptions.filter.ts';
 import { JsonBodyParserMiddleware } from '../../shared/presentation/rest-api/middlewares/json-body-parser.middleware.ts';
 import { UrlEncodedParserMiddleware } from '../../shared/presentation/rest-api/middlewares/url-encoded-parser.middleware.ts';
 import { ShortUrlRestApiModule } from '../../short-url/presentation/rest-api/short-url-rest-api.module.ts';
@@ -19,6 +20,10 @@ import { ShortUrlRestApiModule } from '../../short-url/presentation/rest-api/sho
         transform: true,
         whitelist: true,
       }),
+    },
+    {
+      provide: APP_FILTER,
+      useClass: CatchAllExecptions,
     },
   ],
 })
