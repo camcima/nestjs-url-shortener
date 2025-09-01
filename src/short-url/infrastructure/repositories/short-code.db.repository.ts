@@ -27,6 +27,7 @@ export class ShortCodeDbRepository implements IShortCodeRepository {
     const maybeRow = results[0];
     if (maybeRow) {
       return new ShortUrl({
+        uuid: maybeRow.uuid,
         shortCode: ShortCodeVO.of(maybeRow.short_code),
         destinationUrl: maybeRow.destination_url,
         generatedAt: maybeRow.created_at,

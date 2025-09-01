@@ -1,3 +1,5 @@
+import crypto from 'node:crypto';
+
 import { isNil } from '../../../shared/utils/misc.utils.ts';
 import { ShortCodeVO } from '../../../short-url/domain/value-objects/short-code.vo.ts';
 import { ShortUrl } from '../../domain/entities/short-url.entity.ts';
@@ -42,6 +44,7 @@ export class ShortenUrlUseCase {
 
     const generatedAt = new Date();
     const shortUrl = new ShortUrl({
+      uuid: crypto.randomUUID(),
       shortCode: shortCodeToUse,
       destinationUrl: input.destinationUrl,
       generatedAt,

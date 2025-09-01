@@ -1,5 +1,3 @@
-import crypto from 'node:crypto';
-
 import type { ShortCodeVO } from '../value-objects/short-code.vo.ts';
 
 export class ShortUrl {
@@ -9,11 +7,12 @@ export class ShortUrl {
   readonly generatedAt: Date;
 
   constructor(props: {
+    uuid: string;
     shortCode: ShortCodeVO;
     destinationUrl: string;
     generatedAt: Date;
   }) {
-    this.uuid = crypto.randomUUID();
+    this.uuid = props.uuid;
     this.shortCode = props.shortCode;
     this.destinationUrl = props.destinationUrl;
     this.generatedAt = props.generatedAt;
