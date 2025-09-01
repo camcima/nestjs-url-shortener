@@ -1,7 +1,6 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import {
   ApiBadRequestResponse,
-  ApiBearerAuth,
   ApiCreatedResponse,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
@@ -13,7 +12,6 @@ import { ShortenUrlApplicationToRestApiMapper } from '../mappers/shorten-url-app
 import { ShortenUrlRestApiToApplicationMapper } from '../mappers/shorten-url-rest-api-to-application.mapper.ts';
 
 @Controller('short-urls')
-@ApiBearerAuth()
 @ApiUnauthorizedResponse()
 export class ShortenUrlController {
   constructor(private readonly shortenUrlUseCase: ShortenUrlUseCase) {}
