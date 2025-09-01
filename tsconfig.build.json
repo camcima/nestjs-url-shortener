@@ -7,7 +7,6 @@
 
     "noEmit": false,
 
-    "sourceMap": false,
     "declaration": false
   }
 }

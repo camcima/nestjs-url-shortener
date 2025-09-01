@@ -1,9 +1,9 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "vcs": {
-    "enabled": false,
+    "enabled": true,
     "clientKind": "git",
-    "useIgnoreFile": false
+    "useIgnoreFile": true
   },
   "files": {
     "ignoreUnknown": true,
@@ -39,12 +39,16 @@
     "enabled": true,
     "rules": {
       "recommended": true,
+      "nursery": {
+        "useExplicitType": "off", // disabled because of unsupport for return types only
+        "noFloatingPromises": "error"
+      },
       "suspicious": {
-        "noConsole": "warn",
-        "noExplicitAny": "warn"
+        "noConsole": "info",
+        "noExplicitAny": "off" // disabled due to false positives on TypeScript generics
       },
       "correctness": {
-        "noUnusedVariables": "warn",
+        "noUnusedVariables": "info",
         "noUnusedFunctionParameters": "off", // due to NestJS decorators
         "useImportExtensions": {
           "fix": "safe",
@@ -55,6 +59,7 @@
         }
       },
       "style": {
+        "useImportType": "off", // to support class instrospection via NestJS decorators
         "useTemplate": "error",
         "noCommonJs": "warn",
         "noNamespace": "error",
