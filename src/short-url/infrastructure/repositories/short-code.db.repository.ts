@@ -38,6 +38,16 @@ export class ShortCodeDbRepository implements IShortCodeRepository {
   }
 
   async save(shortCode: ShortUrl): Promise<void> {
-    throw new Error('Method not implemented.');
+    const db = this.dbClient.connection;
+
+    await db
+      .insert(databaseSchema.ShortCodeDbTable)
+      .values({
+        uuid: shortCode.uuid,
+        short_code: shortCode.shortCode.value,
+        destination_url: shortCode.destinationUrl,
+        created_at: shortCode.generatedAt,
+      })
+      .execute();
   }
 }
