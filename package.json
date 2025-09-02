@@ -9,6 +9,7 @@
   },
   "scripts": {
     "// =============================================================== //": "",
+    "typecheck": "tsc --noEmit --project tsconfig.json",
     "build": "tsc --project tsconfig.build.json",
     "// ============================= apps ============================= //": "",
     "rest/start:prod": "node --env-file-if-exists=.env ./dist/apps/rest-api/rest-api.main.js",
