@@ -39,6 +39,7 @@ describe('ShortenUrlUseCase', () => {
             .fn()
             .mockReturnValue(ShortCodeVO.of('abcdef'));
           const dummyExistingShortUrl = new ShortUrl({
+            uuid: crypto.randomUUID(),
             destinationUrl: 'https://google.com',
             generatedAt: new Date(),
             shortCode: ShortCodeVO.of('abcdef'),
