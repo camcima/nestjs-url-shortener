@@ -65,6 +65,9 @@ importers:
       pg:
         specifier: ^8.16.3
         version: 8.16.3
+      pino-http:
+        specifier: ^10.5.0
+        version: 10.5.0
       reflect-metadata:
         specifier: ^0.2.2
         version: 0.2.2
