@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsUrl } from 'class-validator';
+import { IsOptional, IsString, IsUrl } from 'class-validator';
 
 export class ShortenUrlDTO {
   @IsUrl()
@@ -7,11 +7,12 @@ export class ShortenUrlDTO {
   destination_url: string;
 
   @IsString()
+  @IsOptional()
   @ApiProperty({
     required: false,
     type: String,
     description:
       'If not provided, a random valid short code will be generated.',
   })
-  short_code: string;
+  short_code?: string;
 }
