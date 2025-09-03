@@ -10,7 +10,7 @@ import { DomainError } from '../../../kernel/domain/errors/domain-error.interfac
 import { ValidationError } from '../../../kernel/domain/errors/validation-error.interface.ts';
 
 @Catch()
-export class CatchAllExecptions extends BaseExceptionFilter {
+export class CatchAllExceptions extends BaseExceptionFilter {
   catch(exception: unknown, host: ArgumentsHost): void {
     // domain erros will be mapped intto 422 Unprocessable Entity
     if (exception instanceof DomainError) {
