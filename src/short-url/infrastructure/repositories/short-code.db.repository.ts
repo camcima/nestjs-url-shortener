@@ -1,23 +1,23 @@
 import { eq } from 'drizzle-orm';
 
+import { DatabaseClient } from '../../../shared/infrastructure/persistence/database-client';
 import { ShortUrl } from '../../domain/entities/short-url.entity';
 import type { ShortCodeRepositoryPort } from '../../domain/repositories/short-code.repository.port';
 import { ShortCodeVO } from '../../domain/value-objects/short-code.vo';
-import {
-  type DatabaseClientPort,
-  databaseSchema,
-} from '../persistence/database-client.port';
+import { shortUrlDbSchema } from '../persistence';
 
 export class ShortCodeDbRepository implements ShortCodeRepositoryPort {
-  constructor(private readonly dbClient: DatabaseClientPort) {}
+  constructor(
+    private readonly dbClient: DatabaseClient<typeof shortUrlDbSchema>,
+  ) {}
 
   async findByShortCode(shortCode: ShortCodeVO): Promise<ShortUrl | null> {
     const db = this.dbClient.connection;
 
     const results = await db
       .select()
-      .from(databaseSchema.ShortCodeDbTable)
-      .where(eq(databaseSchema.ShortCodeDbTable.short_code, shortCode.value))
+      .from(shortUrlDbSchema.ShortCodesTable)
+      .where(eq(shortUrlDbSchema.ShortCodesTable.short_code, shortCode.value))
       .limit(1);
 
     // const resultsRaw = await db.execute(
@@ -41,7 +41,7 @@ export class ShortCodeDbRepository implements ShortCodeRepositoryPort {
     const db = this.dbClient.connection;
 
     await db
-      .insert(databaseSchema.ShortCodeDbTable)
+      .insert(shortUrlDbSchema.ShortCodesTable)
       .values({
         uuid: shortCode.uuid,
         short_code: shortCode.shortCode.value,
