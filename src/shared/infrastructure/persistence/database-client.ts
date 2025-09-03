@@ -1,5 +1,6 @@
 import { sql } from 'drizzle-orm';
 import { NodePgDatabase, drizzle } from 'drizzle-orm/node-postgres';
+import { Pool } from 'pg';
 
 import { environmentConfiguration } from '../environment.configuration.ts';
 
@@ -22,13 +23,16 @@ export class DatabaseClient<DbSchema extends Record<string, unknown> = any> {
     waitForConnection: boolean;
   }): Promise<void> {
     if (!this.connection) {
+      const connectionString = environmentConfiguration.DATABASE_URL;
+
+      const pool = new Pool({
+        connectionString,
+        ssl: true,
+      });
       this.connection = drizzle({
-        casing: 'snake_case',
-        connection: {
-          connectionString: environmentConfiguration.DATABASE_URL,
-          ssl: true,
-        },
+        client: pool,
         logger: false,
+        casing: 'snake_case',
       });
       if (waitForConnection) {
         await this.checkSelf();
