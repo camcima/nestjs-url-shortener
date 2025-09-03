@@ -1,4 +1,8 @@
-.vscode
+.vscode/
+.cursor/
+
+# Database dump (dbmate)
+db/schema.sql
 
 # Created by https://www.toptal.com/developers/gitignore/api/node,visualstudiocode,vim
 # Edit at https://www.toptal.com/developers/gitignore?templates=node,visualstudiocode,vim
