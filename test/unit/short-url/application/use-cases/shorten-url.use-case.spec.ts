@@ -92,6 +92,27 @@ describe('ShortenUrlUseCase', () => {
       });
     });
 
-    describe.todo('When the short code is not supplied', () => {});
+    describe('When the short code is not supplied', () => {
+      it('should shorten a URL with a random generated short code', async () => {
+        shortCodeRepositoryMock.save = vi.fn().mockResolvedValue(undefined);
+        urlShortCodeGeneratorServiceMock.generate = vi
+          .fn()
+          .mockReturnValue(ShortCodeVO.of('hjikfl'));
+        shortCodeRepositoryMock.findByShortCode = vi
+          .fn()
+          .mockResolvedValue(null);
+
+        const inputDto: IShortenUrlInputDTO = {
+          destinationUrl: 'https://google.com.br',
+        };
+
+        const result = await shortenUrlUseCase.execute(inputDto);
+
+        expect(result).toBeInstanceOf(ShortUrl);
+        expect(result.destinationUrl).toBe(inputDto.destinationUrl);
+        expect(result.shortCode.value).toBe('hjikfl');
+        expect(result.generatedAt).toBeInstanceOf(Date);
+      });
+    });
   });
 });

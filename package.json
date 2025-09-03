@@ -17,6 +17,8 @@
     "// ============================ test ============================ //": "",
     "test": "vitest --config ./test/vitest.config.ts run",
     "watch/test": "vitest --config ./test/vitest.config.ts watch",
+    "watch-cov": "vitest --config ./test/vitest.config.ts watch --ui --coverage",
+    "test:generate-cov": "vitest run --config ./test/vitest.config.ts --coverage",
     "// ============================ sytle ============================ //": "",
     "lint": "biome check --write",
     "lint:check": "biome lint",
@@ -27,7 +29,7 @@
     "db:reset": "dbmate drop && dbmate up",
     "migrate": "DBMATE_MIGRATIONS_TABLE=schema_migrations dbmate --env-file .env.local up",
     "migrate:new": "DBMATE_MIGRATIONS_TABLE=schema_migrations dbmate --env-file .env.local new",
-    "migrate:status": "DBMATE_MIGRATIONS_TABLE=schemax_migrations dbmate --env-file .env.local status",
+    "migrate:status": "DBMATE_MIGRATIONS_TABLE=schemax_migrations dbmate --env-file .env.local status@vitest/coverage-v8",
     "migrate:rollback": "DBMATE_MIGRATIONS_TABLE=schema_migrations dbmate --env-file .env.local down"
   },
   "repository": {
