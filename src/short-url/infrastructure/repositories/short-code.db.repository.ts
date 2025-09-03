@@ -1,15 +1,15 @@
 import { eq } from 'drizzle-orm';
 
 import { ShortUrl } from '../../domain/entities/short-url.entity.ts';
-import type { IShortCodeRepository } from '../../domain/repositories/short-code.repository.port.ts';
+import type { ShortCodeRepositoryPort } from '../../domain/repositories/short-code.repository.port.ts';
 import { ShortCodeVO } from '../../domain/value-objects/short-code.vo.ts';
 import {
-  type IDatabaseClient,
+  type DatabaseClientPort,
   databaseSchema,
 } from '../persistence/database-client.port.ts';
 
-export class ShortCodeDbRepository implements IShortCodeRepository {
-  constructor(private readonly dbClient: IDatabaseClient) {}
+export class ShortCodeDbRepository implements ShortCodeRepositoryPort {
+  constructor(private readonly dbClient: DatabaseClientPort) {}
 
   async findByShortCode(shortCode: ShortCodeVO): Promise<ShortUrl | null> {
     const db = this.dbClient.connection;

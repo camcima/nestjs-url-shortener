@@ -1,4 +1,4 @@
-export abstract class IAppLogger {
+export abstract class AppLoggerPort {
   abstract debug(msg: string, ...args: any[]): void;
   abstract debug(obj: unknown, msg?: string, ...args: any[]): void;
   abstract info(msg: string, ...args: any[]): void;

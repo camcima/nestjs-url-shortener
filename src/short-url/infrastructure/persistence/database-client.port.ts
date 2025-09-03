@@ -5,4 +5,4 @@ export const databaseSchema = {
   ShortCodeDbTable: ShortCodesTable,
 };
 
-export type IDatabaseClient = DatabaseClient<typeof databaseSchema>;
+export type DatabaseClientPort = DatabaseClient<typeof databaseSchema>;

@@ -1,11 +1,11 @@
 import crypto from 'node:crypto';
 
-import { IAppLogger } from '../../../shared/application-logger.service.port.ts';
+import { AppLoggerPort } from '../../../shared/application-logger.service.port.ts';
 import { isNil } from '../../../shared/utils/misc.utils.ts';
 import { ShortCodeVO } from '../../../short-url/domain/value-objects/short-code.vo.ts';
 import { ShortUrl } from '../../domain/entities/short-url.entity.ts';
 import { ShortCodeAlreadyTakenError } from '../../domain/errors/short-code-already-taken.error.ts';
-import { IShortCodeRepository } from '../../domain/repositories/short-code.repository.port.ts';
+import { ShortCodeRepositoryPort } from '../../domain/repositories/short-code.repository.port.ts';
 import { UrlShortCodeGeneratorService } from '../../domain/services/url-short-code-generator.service.ts';
 
 export interface IShortenUrlInputDTO {
@@ -21,9 +21,9 @@ export interface IShortenUrlInputDTO {
 
 export class ShortenUrlUseCase {
   constructor(
-    private readonly logger: IAppLogger,
+    private readonly logger: AppLoggerPort,
 
-    private readonly shortCodeRepository: IShortCodeRepository,
+    private readonly shortCodeRepository: ShortCodeRepositoryPort,
     private readonly urlShortCodeGeneratorService: UrlShortCodeGeneratorService,
   ) {}
 

@@ -4,7 +4,7 @@ import {
   PinoLogger,
 } from 'nestjs-pino';
 
-import { IAppLogger } from '../../application-logger.service.port.ts';
+import { AppLoggerPort } from '../../application-logger.service.port.ts';
 import { environmentConfiguration } from '../environment.configuration.ts';
 
 @Module({
@@ -43,11 +43,11 @@ import { environmentConfiguration } from '../environment.configuration.ts';
   ],
   providers: [
     {
-      provide: IAppLogger,
+      provide: AppLoggerPort,
       scope: Scope.TRANSIENT,
       useClass: PinoLogger,
     },
   ],
-  exports: [IAppLogger],
+  exports: [AppLoggerPort],
 })
 export class LoggerModule {}

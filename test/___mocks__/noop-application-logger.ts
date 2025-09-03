@@ -1,6 +1,6 @@
-import type { IAppLogger } from '../../src/shared/application-logger.service.port.ts';
+import type { AppLoggerPort } from '../../src/shared/application-logger.service.port.ts';
 
-export class NoopApplicationLoggerMock implements IAppLogger {
+export class NoopApplicationLoggerMock implements AppLoggerPort {
   setContext(): void {}
   error(): void {}
   warn(): void {}

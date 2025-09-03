@@ -1,11 +1,11 @@
-import type { IAppLogger } from '../../../../../src/shared/application-logger.service.port.ts';
+import type { AppLoggerPort } from '../../../../../src/shared/application-logger.service.port.ts';
 import {
   type IShortenUrlInputDTO,
   ShortenUrlUseCase,
 } from '../../../../../src/short-url/application/use-cases/shorten-url.use-case.ts';
 import { ShortUrl } from '../../../../../src/short-url/domain/entities/short-url.entity.ts';
 import { ShortCodeAlreadyTakenError } from '../../../../../src/short-url/domain/errors/short-code-already-taken.error.ts';
-import type { IShortCodeRepository } from '../../../../../src/short-url/domain/repositories/short-code.repository.port.ts';
+import type { ShortCodeRepositoryPort } from '../../../../../src/short-url/domain/repositories/short-code.repository.port.ts';
 import type { UrlShortCodeGeneratorService } from '../../../../../src/short-url/domain/services/url-short-code-generator.service.ts';
 import { ShortCodeVO } from '../../../../../src/short-url/domain/value-objects/short-code.vo.ts';
 import { NoopApplicationLoggerMock } from '../../../../___mocks__/noop-application-logger.ts';
@@ -13,9 +13,9 @@ import { NoopApplicationLoggerMock } from '../../../../___mocks__/noop-applicati
 describe('ShortenUrlUseCase', () => {
   let shortenUrlUseCase: ShortenUrlUseCase;
   // dependencies
-  let loggerMock: IAppLogger;
+  let loggerMock: AppLoggerPort;
   let urlShortCodeGeneratorServiceMock: UrlShortCodeGeneratorService;
-  let shortCodeRepositoryMock: IShortCodeRepository;
+  let shortCodeRepositoryMock: ShortCodeRepositoryPort;
 
   beforeEach(() => {
     // TODO: find a better way to create mocks knowing that the deps might depend on other deps. because we are knowing too much about the deps structure when creating the mocks
@@ -27,7 +27,7 @@ describe('ShortenUrlUseCase', () => {
 
     shortCodeRepositoryMock = {
       findByShortCode: vi.fn(),
-    } as unknown as IShortCodeRepository;
+    } as unknown as ShortCodeRepositoryPort;
 
     shortenUrlUseCase = new ShortenUrlUseCase(
       loggerMock,
