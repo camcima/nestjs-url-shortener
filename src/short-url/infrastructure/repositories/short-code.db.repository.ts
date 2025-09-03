@@ -1,12 +1,12 @@
 import { eq } from 'drizzle-orm';
 
-import { ShortUrl } from '../../domain/entities/short-url.entity.ts';
-import type { ShortCodeRepositoryPort } from '../../domain/repositories/short-code.repository.port.ts';
-import { ShortCodeVO } from '../../domain/value-objects/short-code.vo.ts';
+import { ShortUrl } from '../../domain/entities/short-url.entity';
+import type { ShortCodeRepositoryPort } from '../../domain/repositories/short-code.repository.port';
+import { ShortCodeVO } from '../../domain/value-objects/short-code.vo';
 import {
   type DatabaseClientPort,
   databaseSchema,
-} from '../persistence/database-client.port.ts';
+} from '../persistence/database-client.port';
 
 export class ShortCodeDbRepository implements ShortCodeRepositoryPort {
   constructor(private readonly dbClient: DatabaseClientPort) {}

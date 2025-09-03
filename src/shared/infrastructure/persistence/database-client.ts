@@ -2,7 +2,7 @@ import { sql } from 'drizzle-orm';
 import { NodePgDatabase, drizzle } from 'drizzle-orm/node-postgres';
 import { Pool } from 'pg';
 
-import { environmentConfiguration } from '../environment.configuration.ts';
+import { environmentConfiguration } from '../environment.configuration';
 
 export class DatabaseClient<DbSchema extends Record<string, unknown> = any> {
   connection: NodePgDatabase<DbSchema>;

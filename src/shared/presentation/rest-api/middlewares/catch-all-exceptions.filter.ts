@@ -6,8 +6,8 @@ import {
 } from '@nestjs/common';
 import { BaseExceptionFilter } from '@nestjs/core';
 
-import { DomainError } from '../../../kernel/domain/errors/domain-error.interface.ts';
-import { ValidationError } from '../../../kernel/domain/errors/validation-error.interface.ts';
+import { DomainError } from '../../../kernel/domain/errors/domain-error.interface';
+import { ValidationError } from '../../../kernel/domain/errors/validation-error.interface';
 
 @Catch()
 export class CatchAllExceptions extends BaseExceptionFilter {

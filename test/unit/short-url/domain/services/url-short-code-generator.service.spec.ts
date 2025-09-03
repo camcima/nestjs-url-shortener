@@ -1,5 +1,5 @@
-import { UrlShortCodeGeneratorService } from '../../../../../src/short-url/domain/services/url-short-code-generator.service.ts';
-import { ShortCodeVO } from '../../../../../src/short-url/domain/value-objects/short-code.vo.ts';
+import { UrlShortCodeGeneratorService } from '../../../../../src/short-url/domain/services/url-short-code-generator.service';
+import { ShortCodeVO } from '../../../../../src/short-url/domain/value-objects/short-code.vo';
 
 describe('UrlShortCodeGeneratorService', () => {
   describe('#generate()', () => {

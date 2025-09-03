@@ -4,8 +4,8 @@ import {
   PinoLogger,
 } from 'nestjs-pino';
 
-import { AppLoggerPort } from '../../application-logger.service.port.ts';
-import { environmentConfiguration } from '../environment.configuration.ts';
+import { AppLoggerPort } from '../../application-logger.service.port';
+import { environmentConfiguration } from '../environment.configuration';
 
 @Module({
   imports: [

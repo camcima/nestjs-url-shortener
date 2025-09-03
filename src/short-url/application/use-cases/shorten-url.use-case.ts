@@ -1,12 +1,12 @@
 import crypto from 'node:crypto';
 
-import { AppLoggerPort } from '../../../shared/application-logger.service.port.ts';
-import { isNil } from '../../../shared/utils/misc.utils.ts';
-import { ShortCodeVO } from '../../../short-url/domain/value-objects/short-code.vo.ts';
-import { ShortUrl } from '../../domain/entities/short-url.entity.ts';
-import { ShortCodeAlreadyTakenError } from '../../domain/errors/short-code-already-taken.error.ts';
-import { ShortCodeRepositoryPort } from '../../domain/repositories/short-code.repository.port.ts';
-import { UrlShortCodeGeneratorService } from '../../domain/services/url-short-code-generator.service.ts';
+import { AppLoggerPort } from '../../../shared/application-logger.service.port';
+import { isNil } from '../../../shared/utils/misc.utils';
+import { ShortCodeVO } from '../../../short-url/domain/value-objects/short-code.vo';
+import { ShortUrl } from '../../domain/entities/short-url.entity';
+import { ShortCodeAlreadyTakenError } from '../../domain/errors/short-code-already-taken.error';
+import { ShortCodeRepositoryPort } from '../../domain/repositories/short-code.repository.port';
+import { UrlShortCodeGeneratorService } from '../../domain/services/url-short-code-generator.service';
 
 export interface IShortenUrlInputDTO {
   /**

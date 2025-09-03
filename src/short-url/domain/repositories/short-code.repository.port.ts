@@ -1,5 +1,5 @@
-import type { ShortUrl } from '../../../short-url/domain/entities/short-url.entity.ts';
-import type { ShortCodeVO } from '../../../short-url/domain/value-objects/short-code.vo.ts';
+import type { ShortUrl } from '../../../short-url/domain/entities/short-url.entity';
+import type { ShortCodeVO } from '../../../short-url/domain/value-objects/short-code.vo';
 
 export abstract class ShortCodeRepositoryPort {
   abstract findByShortCode(shortCode: ShortCodeVO): Promise<ShortUrl | null>;

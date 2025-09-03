@@ -1,4 +1,4 @@
-import { isNil } from '../../../../src/shared/utils/misc.utils.ts';
+import { isNil } from '../../../../src/shared/utils/misc.utils';
 
 describe('isNil', () => {
   it('should return true for null or undefined', () => {

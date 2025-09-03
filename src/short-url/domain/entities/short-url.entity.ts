@@ -1,4 +1,4 @@
-import type { ShortCodeVO } from '../value-objects/short-code.vo.ts';
+import type { ShortCodeVO } from '../value-objects/short-code.vo';
 
 export class ShortUrl {
   readonly uuid: string;

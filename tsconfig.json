@@ -39,12 +39,12 @@
     "skipLibCheck": true,
     "types": ["node", "vitest/globals"],
 
-    "module": "nodenext",
-    "moduleResolution": "nodenext",
+    "module": "commonjs",
+    "moduleResolution": "node",
     "target": "esnext",
 
-    "verbatimModuleSyntax": true,
-    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": false,
+    "allowImportingTsExtensions": false,
     "rewriteRelativeImportExtensions": true,
     "erasableSyntaxOnly": false,
 

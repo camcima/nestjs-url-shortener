@@ -1,6 +1,6 @@
-import type { IResolveShortCodeInputDTO } from '../../../application/use-cases/resolve-short-code-url.use-case.ts';
-import { ShortCodeVO } from '../../../domain/value-objects/short-code.vo.ts';
-import type { ResolveShortCodeDTO } from '../dtos/resolve-short-code.dto.ts';
+import type { IResolveShortCodeInputDTO } from '../../../application/use-cases/resolve-short-code-url.use-case';
+import { ShortCodeVO } from '../../../domain/value-objects/short-code.vo';
+import type { ResolveShortCodeDTO } from '../dtos/resolve-short-code.dto';
 
 export class ResolveUrlRestApiToApplicationMapper {
   static fromResolveShortCodeDTO(

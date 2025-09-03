@@ -1,6 +1,6 @@
 {
   "name": "nestjs-url-shortener",
-  "type": "module",
+  "type": "commonjs",
   "version": "0.0.0-development.0",
   "private": true,
   "description": "A simple url shortening API built on NestJS, using modern best practices",

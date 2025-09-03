@@ -6,11 +6,11 @@ import {
   ApiUnprocessableEntityResponse,
 } from '@nestjs/swagger';
 
-import { ShortenUrlUseCase } from '../../../application/use-cases/shorten-url.use-case.ts';
-import { ShortUrlReadDTO } from '../dtos/short-url.read-dto.ts';
-import { ShortenUrlDTO } from '../dtos/shorten-url.dto.ts';
-import { ShortenUrlApplicationToRestApiMapper } from '../mappers/shorten-url-application-to-rest-api.mapper.ts';
-import { ShortenUrlRestApiToApplicationMapper } from '../mappers/shorten-url-rest-api-to-application.mapper.ts';
+import { ShortenUrlUseCase } from '../../../application/use-cases/shorten-url.use-case';
+import { ShortUrlReadDTO } from '../dtos/short-url.read-dto';
+import { ShortenUrlDTO } from '../dtos/shorten-url.dto';
+import { ShortenUrlApplicationToRestApiMapper } from '../mappers/shorten-url-application-to-rest-api.mapper';
+import { ShortenUrlRestApiToApplicationMapper } from '../mappers/shorten-url-rest-api-to-application.mapper';
 
 @Controller('short-urls')
 @ApiUnauthorizedResponse()

@@ -1,4 +1,4 @@
-import { ValidationError } from '../../../shared/kernel/domain/errors/validation-error.interface.ts';
+import { ValidationError } from '../../../shared/kernel/domain/errors/validation-error.interface';
 
 export class InvalidShortCodeError extends ValidationError {
   constructor(givenShortCode: string) {

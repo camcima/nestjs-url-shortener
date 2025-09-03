@@ -1,14 +1,14 @@
-import type { AppLoggerPort } from '../../../../../src/shared/application-logger.service.port.ts';
+import type { AppLoggerPort } from '../../../../../src/shared/application-logger.service.port';
 import {
   type IShortenUrlInputDTO,
   ShortenUrlUseCase,
-} from '../../../../../src/short-url/application/use-cases/shorten-url.use-case.ts';
-import { ShortUrl } from '../../../../../src/short-url/domain/entities/short-url.entity.ts';
-import { ShortCodeAlreadyTakenError } from '../../../../../src/short-url/domain/errors/short-code-already-taken.error.ts';
-import type { ShortCodeRepositoryPort } from '../../../../../src/short-url/domain/repositories/short-code.repository.port.ts';
-import type { UrlShortCodeGeneratorService } from '../../../../../src/short-url/domain/services/url-short-code-generator.service.ts';
-import { ShortCodeVO } from '../../../../../src/short-url/domain/value-objects/short-code.vo.ts';
-import { NoopApplicationLoggerMock } from '../../../../___mocks__/noop-application-logger.ts';
+} from '../../../../../src/short-url/application/use-cases/shorten-url.use-case';
+import { ShortUrl } from '../../../../../src/short-url/domain/entities/short-url.entity';
+import { ShortCodeAlreadyTakenError } from '../../../../../src/short-url/domain/errors/short-code-already-taken.error';
+import type { ShortCodeRepositoryPort } from '../../../../../src/short-url/domain/repositories/short-code.repository.port';
+import type { UrlShortCodeGeneratorService } from '../../../../../src/short-url/domain/services/url-short-code-generator.service';
+import { ShortCodeVO } from '../../../../../src/short-url/domain/value-objects/short-code.vo';
+import { NoopApplicationLoggerMock } from '../../../../___mocks__/noop-application-logger';
 
 describe('ShortenUrlUseCase', () => {
   let shortenUrlUseCase: ShortenUrlUseCase;

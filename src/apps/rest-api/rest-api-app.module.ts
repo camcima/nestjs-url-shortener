@@ -6,11 +6,11 @@ import {
 } from '@nestjs/common';
 import { APP_FILTER, APP_PIPE } from '@nestjs/core';
 
-import { TelemetryModule } from '../../shared/infrastructure/telemetry/telemetry.module.ts';
-import { CatchAllExceptions } from '../../shared/presentation/rest-api/middlewares/catch-all-exceptions.filter.ts';
-import { JsonBodyParserMiddleware } from '../../shared/presentation/rest-api/middlewares/json-body-parser.middleware.ts';
-import { UrlEncodedParserMiddleware } from '../../shared/presentation/rest-api/middlewares/url-encoded-parser.middleware.ts';
-import { ShortUrlRestApiModule } from '../../short-url/presentation/rest-api/short-url-rest-api.module.ts';
+import { TelemetryModule } from '../../shared/infrastructure/telemetry/telemetry.module.js';
+import { CatchAllExceptions } from '../../shared/presentation/rest-api/middlewares/catch-all-exceptions.filter';
+import { JsonBodyParserMiddleware } from '../../shared/presentation/rest-api/middlewares/json-body-parser.middleware';
+import { UrlEncodedParserMiddleware } from '../../shared/presentation/rest-api/middlewares/url-encoded-parser.middleware';
+import { ShortUrlRestApiModule } from '../../short-url/presentation/rest-api/short-url-rest-api.module';
 
 @Module({
   imports: [TelemetryModule, ShortUrlRestApiModule],

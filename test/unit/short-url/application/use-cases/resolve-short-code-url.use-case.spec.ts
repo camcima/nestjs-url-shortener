@@ -1,11 +1,11 @@
 import {
   type IResolveShortCodeInputDTO,
   ResolveShortCodeUrlUseCase,
-} from '../../../../../src/short-url/application/use-cases/resolve-short-code-url.use-case.ts';
-import type { ShortUrl } from '../../../../../src/short-url/domain/entities/short-url.entity.ts';
-import { ShortCodeNotFoundError } from '../../../../../src/short-url/domain/errors/short-code-not-found.error.ts';
-import type { ShortCodeRepositoryPort } from '../../../../../src/short-url/domain/repositories/short-code.repository.port.ts';
-import { ShortCodeVO } from '../../../../../src/short-url/domain/value-objects/short-code.vo.ts';
+} from '../../../../../src/short-url/application/use-cases/resolve-short-code-url.use-case';
+import type { ShortUrl } from '../../../../../src/short-url/domain/entities/short-url.entity';
+import { ShortCodeNotFoundError } from '../../../../../src/short-url/domain/errors/short-code-not-found.error';
+import type { ShortCodeRepositoryPort } from '../../../../../src/short-url/domain/repositories/short-code.repository.port';
+import { ShortCodeVO } from '../../../../../src/short-url/domain/value-objects/short-code.vo';
 
 describe('ResolveShortCodeUrlUseCase', () => {
   let shortenUrlUseCase: ResolveShortCodeUrlUseCase;

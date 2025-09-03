@@ -1,5 +1,5 @@
-import type { DatabaseClient } from '../../../shared/infrastructure/persistence/database-client.ts';
-import { ShortCodesTable } from './schemas/short-code.db.ts';
+import type { DatabaseClient } from '../../../shared/infrastructure/persistence/database-client';
+import { ShortCodesTable } from './schemas/short-code.db';
 
 export const databaseSchema = {
   ShortCodeDbTable: ShortCodesTable,

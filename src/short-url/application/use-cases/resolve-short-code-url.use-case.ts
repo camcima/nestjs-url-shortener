@@ -1,8 +1,8 @@
-import { isNil } from '../../../shared/utils/misc.utils.ts';
-import type { ShortUrl } from '../../domain/entities/short-url.entity.ts';
-import { ShortCodeNotFoundError } from '../../domain/errors/short-code-not-found.error.ts';
-import { ShortCodeRepositoryPort } from '../../domain/repositories/short-code.repository.port.ts';
-import type { ShortCodeVO } from '../../domain/value-objects/short-code.vo.ts';
+import { isNil } from '../../../shared/utils/misc.utils';
+import type { ShortUrl } from '../../domain/entities/short-url.entity';
+import { ShortCodeNotFoundError } from '../../domain/errors/short-code-not-found.error';
+import { ShortCodeRepositoryPort } from '../../domain/repositories/short-code.repository.port';
+import type { ShortCodeVO } from '../../domain/value-objects/short-code.vo';
 
 export type IResolveShortCodeInputDTO = {
   /**

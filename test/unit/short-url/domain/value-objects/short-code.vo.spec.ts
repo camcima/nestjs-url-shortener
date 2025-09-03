@@ -1,5 +1,5 @@
-import { InvalidShortCodeError } from '../../../../../src/short-url/domain/errors/invalid-short-code.error.ts';
-import { ShortCodeVO } from '../../../../../src/short-url/domain/value-objects/short-code.vo.ts';
+import { InvalidShortCodeError } from '../../../../../src/short-url/domain/errors/invalid-short-code.error';
+import { ShortCodeVO } from '../../../../../src/short-url/domain/value-objects/short-code.vo';
 
 describe('ShortCodeVO', () => {
   describe('when the given short code is valid', () => {

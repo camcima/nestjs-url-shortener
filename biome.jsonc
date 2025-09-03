@@ -50,18 +50,12 @@
       "correctness": {
         "noUnusedVariables": "info",
         "noUnusedFunctionParameters": "off", // due to NestJS decorators
-        "useImportExtensions": {
-          "fix": "safe",
-          "level": "error",
-          "options": {
-            "forceJsExtensions": true
-          }
-        }
+        "useImportExtensions": "off"
       },
       "style": {
         "useImportType": "off", // to support class instrospection via NestJS decorators
         "useTemplate": "error",
-        "noCommonJs": "warn",
+        "noCommonJs": "off",
         "noNamespace": "error",
         "useNodejsImportProtocol": "info",
         "noEnum": "off",

@@ -13,7 +13,7 @@ import { NodeSDK } from '@opentelemetry/sdk-node';
 import { BatchSpanProcessor } from '@opentelemetry/sdk-trace-base';
 import { ATTR_SERVICE_NAME } from '@opentelemetry/semantic-conventions';
 
-import { environmentConfiguration } from '../environment.configuration.ts';
+import { environmentConfiguration } from '../environment.configuration';
 
 export function loadTracingIntoProcess() {
   const otelSDK = new NodeSDK({

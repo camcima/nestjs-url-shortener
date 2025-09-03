@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 
-import { DatabaseClient } from './database-client.ts';
+import { DatabaseClient } from './database-client';
 
 @Module({
   providers: [

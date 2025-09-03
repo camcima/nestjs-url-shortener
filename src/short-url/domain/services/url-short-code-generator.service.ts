@@ -1,6 +1,6 @@
 import * as crypto from 'node:crypto';
 
-import { ShortCodeVO } from '../../../short-url/domain/value-objects/short-code.vo.ts';
+import { ShortCodeVO } from '../../../short-url/domain/value-objects/short-code.vo';
 
 export class UrlShortCodeGeneratorService {
   private getSecureRandomInt(max: number): number {

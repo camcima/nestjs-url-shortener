@@ -1,4 +1,4 @@
-import { InvalidShortCodeError } from '../errors/invalid-short-code.error.ts';
+import { InvalidShortCodeError } from '../errors/invalid-short-code.error';
 
 export class ShortCodeVO {
   private constructor(public readonly value: string) {}
