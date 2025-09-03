@@ -16,7 +16,6 @@ export class DatabaseClient<DbSchema extends Record<string, unknown> = any> {
     }
   }
 
-  // TODO: use same logger as the rest of the app
   async init({
     waitForConnection,
   }: {

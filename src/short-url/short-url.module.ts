@@ -48,9 +48,7 @@ import { ShortCodeDbRepository } from './infrastructure/repositories/short-code.
     },
     {
       provide: ResolveShortCodeUrlUseCase,
-      inject: [ShortCodeRepositoryPort],
-      useFactory: (shortCodeRepository: ShortCodeRepositoryPort) =>
-        new ResolveShortCodeUrlUseCase(shortCodeRepository),
+      useClass: ResolveShortCodeUrlUseCase,
     },
   ],
   exports: [ShortenUrlUseCase, ResolveShortCodeUrlUseCase],
