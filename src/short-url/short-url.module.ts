@@ -1,5 +1,7 @@
 import { Module } from '@nestjs/common';
 
+import { IAppLogger } from '../shared/application-logger.service.port.ts';
+import { LoggerModule } from '../shared/infrastructure/logger/logger.module.ts';
 import { DatabaseModule } from '../shared/infrastructure/persistence/database.module.ts';
 import { DatabaseClient } from '../shared/infrastructure/persistence/database-client.ts';
 import { ResolveShortCodeUrlUseCase } from './application/use-cases/resolve-short-code-url.use-case.ts';
@@ -9,7 +11,7 @@ import { UrlShortCodeGeneratorService } from './domain/services/url-short-code-g
 import { ShortCodeDbRepository } from './infrastructure/repositories/short-code.db.repository.ts';
 
 @Module({
-  imports: [DatabaseModule],
+  imports: [LoggerModule, DatabaseModule],
   providers: [
     {
       provide: IShortCodeRepository,
@@ -18,21 +20,27 @@ import { ShortCodeDbRepository } from './infrastructure/repositories/short-code.
         return new ShortCodeDbRepository(databaseClient);
       },
     },
+
     {
       provide: UrlShortCodeGeneratorService,
       useClass: UrlShortCodeGeneratorService,
     },
     {
       provide: ShortenUrlUseCase,
-      inject: [IShortCodeRepository, UrlShortCodeGeneratorService],
+      inject: [IAppLogger, IShortCodeRepository, UrlShortCodeGeneratorService],
       useFactory: (
+        appLogger: IAppLogger,
         shortCodeRepository: IShortCodeRepository,
         urlShortCodeGeneratorService: UrlShortCodeGeneratorService,
-      ) =>
-        new ShortenUrlUseCase(
+      ) => {
+        appLogger.setContext(ShortenUrlUseCase.name);
+
+        return new ShortenUrlUseCase(
+          appLogger,
           shortCodeRepository,
           urlShortCodeGeneratorService,
-        ),
+        );
+      },
     },
     {
       provide: ResolveShortCodeUrlUseCase,

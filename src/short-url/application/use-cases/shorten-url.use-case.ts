@@ -1,11 +1,12 @@
 import crypto from 'node:crypto';
 
+import { IAppLogger } from '../../../shared/application-logger.service.port.ts';
 import { isNil } from '../../../shared/utils/misc.utils.ts';
 import { ShortCodeVO } from '../../../short-url/domain/value-objects/short-code.vo.ts';
 import { ShortUrl } from '../../domain/entities/short-url.entity.ts';
 import { ShortCodeAlreadyTakenError } from '../../domain/errors/short-code-already-taken.error.ts';
-import type { IShortCodeRepository } from '../../domain/repositories/short-code.repository.port.ts';
-import type { UrlShortCodeGeneratorService } from '../../domain/services/url-short-code-generator.service.ts';
+import { IShortCodeRepository } from '../../domain/repositories/short-code.repository.port.ts';
+import { UrlShortCodeGeneratorService } from '../../domain/services/url-short-code-generator.service.ts';
 
 export interface IShortenUrlInputDTO {
   /**
@@ -20,6 +21,8 @@ export interface IShortenUrlInputDTO {
 
 export class ShortenUrlUseCase {
   constructor(
+    private readonly logger: IAppLogger,
+
     private readonly shortCodeRepository: IShortCodeRepository,
     private readonly urlShortCodeGeneratorService: UrlShortCodeGeneratorService,
   ) {}
@@ -50,6 +53,9 @@ export class ShortenUrlUseCase {
       generatedAt,
     });
 
+    this.logger.info(
+      `Generated short URL with code "${shortUrl.shortCode}" for destination URL "${shortUrl.destinationUrl}"`,
+    );
     await this.shortCodeRepository.save(shortUrl);
 
     return shortUrl;

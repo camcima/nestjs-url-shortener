@@ -29,7 +29,7 @@ export class DatabaseClient<DbSchema extends Record<string, unknown> = any> {
           connectionString: environmentConfiguration.DATABASE_URL,
           ssl: true,
         },
-        logger: true,
+        logger: false,
       });
       if (waitForConnection) {
         await this.checkSelf();

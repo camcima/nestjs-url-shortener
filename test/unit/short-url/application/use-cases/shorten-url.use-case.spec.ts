@@ -1,3 +1,4 @@
+import type { IAppLogger } from '../../../../../src/shared/application-logger.service.port.ts';
 import {
   type IShortenUrlInputDTO,
   ShortenUrlUseCase,
@@ -7,15 +8,19 @@ import { ShortCodeAlreadyTakenError } from '../../../../../src/short-url/domain/
 import type { IShortCodeRepository } from '../../../../../src/short-url/domain/repositories/short-code.repository.port.ts';
 import type { UrlShortCodeGeneratorService } from '../../../../../src/short-url/domain/services/url-short-code-generator.service.ts';
 import { ShortCodeVO } from '../../../../../src/short-url/domain/value-objects/short-code.vo.ts';
+import { NoopApplicationLoggerMock } from '../../../../___mocks__/noop-application-logger.ts';
 
 describe('ShortenUrlUseCase', () => {
   let shortenUrlUseCase: ShortenUrlUseCase;
   // dependencies
+  let loggerMock: IAppLogger;
   let urlShortCodeGeneratorServiceMock: UrlShortCodeGeneratorService;
   let shortCodeRepositoryMock: IShortCodeRepository;
 
   beforeEach(() => {
     // TODO: find a better way to create mocks knowing that the deps might depend on other deps. because we are knowing too much about the deps structure when creating the mocks
+
+    loggerMock = new NoopApplicationLoggerMock();
 
     urlShortCodeGeneratorServiceMock =
       {} as unknown as UrlShortCodeGeneratorService;
@@ -25,6 +30,7 @@ describe('ShortenUrlUseCase', () => {
     } as unknown as IShortCodeRepository;
 
     shortenUrlUseCase = new ShortenUrlUseCase(
+      loggerMock,
       shortCodeRepositoryMock,
       urlShortCodeGeneratorServiceMock,
     );

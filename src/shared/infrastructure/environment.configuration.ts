@@ -5,7 +5,7 @@ export const environmentConfiguration = cleanEnv(process.env, {
   REST_API_APP_PORT: port(),
   DATABASE_URL: str(),
   LOG_LEVEL: str({
-    default: 'log',
-    choices: ['debug', 'error', 'log'],
+    default: 'info',
+    choices: ['debug', 'error', 'info'],
   }),
 });
