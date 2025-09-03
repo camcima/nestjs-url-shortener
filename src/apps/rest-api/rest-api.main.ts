@@ -4,10 +4,13 @@ import type { NestExpressApplication } from '@nestjs/platform-express';
 import { Logger } from 'nestjs-pino';
 
 import { environmentConfiguration } from '../../shared/infrastructure/environment.configuration.ts';
+import { loadTracingIntoProcess } from '../../shared/infrastructure/telemetry/tracing-loader.ts';
 import { loadSwaggerForNestjsApp } from '../../shared/presentation/rest-api/documentation/open-api-loader.ts';
 import { RestApiAppModule } from './rest-api-app.module.ts';
 
 async function bootstrap() {
+  loadTracingIntoProcess();
+
   const app = await NestFactory.create<NestExpressApplication>(
     RestApiAppModule,
     {
