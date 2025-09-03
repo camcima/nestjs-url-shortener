@@ -1,5 +1,3 @@
-import { Injectable } from '@nestjs/common';
-
 import { isNil } from '../../../shared/utils/misc.utils.ts';
 import type { ShortUrl } from '../../domain/entities/short-url.entity.ts';
 import { ShortCodeNotFoundError } from '../../domain/errors/short-code-not-found.error.ts';
@@ -13,7 +11,6 @@ export type IResolveShortCodeInputDTO = {
   shortCodeToResolve: ShortCodeVO;
 };
 
-@Injectable()
 export class ResolveShortCodeUrlUseCase {
   constructor(private readonly shortCodeRepository: ShortCodeRepositoryPort) {}
 

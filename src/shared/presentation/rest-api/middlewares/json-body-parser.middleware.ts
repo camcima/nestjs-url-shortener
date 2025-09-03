@@ -1,8 +1,7 @@
-import { Injectable, type NestMiddleware } from '@nestjs/common';
+import { type NestMiddleware } from '@nestjs/common';
 import bodyParser from 'body-parser';
 import type { NextFunction, Request, Response } from 'express';
 
-@Injectable()
 export class JsonBodyParserMiddleware implements NestMiddleware {
   private readonly options: bodyParser.OptionsJson = {
     type: 'application/json',
