@@ -1,8 +1,18 @@
 pre-commit:
   commands:
-    lint:
-      run: npm run lint
+    biome:
+      glob: '*.{js,ts}'
+      run: npm run lint {staged_files}
     format:
-      run: npm run format
+      glob: '*.{js,ts,json,md}'
+      run: npm run format {staged_files}
+
+pre-push:
+  commands:
     test:
-      run: npm run test
+      run: npx vitest run --config ./test/vitest.config.ts --project unit
+
+commit-msg:
+  commands:
+    commitlint:
+      run: npx commitlint --edit {1}

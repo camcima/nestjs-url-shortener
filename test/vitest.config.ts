@@ -10,12 +10,6 @@ export default mergeConfig(
   defineConfig({
     test: {
       dir: 'test',
-      include: ['**/*.spec.ts'],
-
-      globals: true,
-
-      env: loadEnv('test', process.cwd(), ''),
-
       environment: 'node',
       logHeapUsage: true,
       passWithNoTests: true,
@@ -23,6 +17,9 @@ export default mergeConfig(
       typecheck: {
         ignoreSourceErrors: true,
       },
+      globals: true,
+      env: loadEnv('test', process.cwd(), ''),
+
       coverage: {
         enabled: false, // not generate coverage by default
         clean: true,
@@ -35,9 +32,41 @@ export default mergeConfig(
           'test/**',
           'commitlint.config.js',
 
+          'src/**/*.port.ts',
+
           'src/apps/**/*.main.ts',
         ],
       },
+
+      projects: [
+        {
+          extends: true,
+          test: {
+            name: 'unit',
+
+            dir: 'test/unit',
+            include: ['**/*.spec.ts'],
+          },
+        },
+        {
+          extends: true,
+          test: {
+            name: 'E2E',
+
+            dir: 'test/e2e',
+            include: ['**/*.e2e-spec.ts'],
+          },
+        },
+        {
+          extends: true,
+          test: {
+            name: 'integration',
+
+            dir: 'test/integration',
+            include: ['**/*.e2e-spec.ts'],
+          },
+        },
+      ],
     },
   }),
 );
