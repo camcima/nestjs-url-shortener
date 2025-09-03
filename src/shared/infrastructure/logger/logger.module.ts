@@ -26,7 +26,7 @@ import { environmentConfiguration } from '../environment.configuration.ts';
               },
             },
             transport:
-              environmentConfiguration.NODE_ENV === 'production'
+              environmentConfiguration.NODE_ENV !== 'production'
                 ? {
                     target: 'pino-pretty',
                     options: {
