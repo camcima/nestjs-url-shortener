@@ -8,8 +8,7 @@ import { DatabaseClient } from './database-client';
     {
       provide: DatabaseClient,
       useFactory: async () => {
-        const dbClient = new DatabaseClient();
-        await dbClient.init({
+        const dbClient = await DatabaseClient.init({
           connectionString: environmentConfiguration.DATABASE_URL,
         });
         return dbClient;

@@ -5,6 +5,8 @@ import { Pool } from 'pg';
 export class DatabaseClient<DbSchema extends Record<string, unknown> = any> {
   connection: NodePgDatabase<DbSchema>;
 
+  private constructor() {}
+
   async isConnected(): Promise<
     | {
         ok: true;
@@ -34,25 +36,29 @@ export class DatabaseClient<DbSchema extends Record<string, unknown> = any> {
     }
   }
 
-  async init({
+  static async init({
     connectionString,
   }: {
     connectionString: string;
-  }): Promise<void> {
+  }): Promise<DatabaseClient> {
+    const dbClient = new DatabaseClient();
+
     const pool = new Pool({
       connectionString,
       ssl: true,
     });
-    this.connection = drizzle({
+    dbClient.connection = drizzle({
       client: pool,
       logger: false,
       casing: 'snake_case',
     });
-    const isConnectionStablishResult = await this.isConnected();
+    const isConnectionStablishResult = await dbClient.isConnected();
     if (!isConnectionStablishResult.ok) {
       throw new Error('Database connection failed', {
         cause: isConnectionStablishResult.error,
       });
     }
+
+    return dbClient;
   }
 }
