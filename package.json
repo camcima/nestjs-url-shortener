@@ -24,7 +24,7 @@
     "// ============================ sytle ============================ //": "",
     "lint": "biome check --write",
     "lint:check": "biome lint",
-    "format": "biome check --formatter-enabled=true --enforce-assist true --write",
+    "format": "biome check --formatter-enabled=true --enforce-assist true --no-errors-on-unmatched --write",
     "format:check": "biome check --formatter-enabled=true --enforce-assist true",
     "// ============================== db ============================== //": "",
     "db:init": "dbmate up",
