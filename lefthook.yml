@@ -9,6 +9,8 @@ pre-commit:
 
 pre-push:
   commands:
+    typecheck:
+      run: npm run typecheck
     test:
       run: npx vitest run --config ./test/vitest.config.ts --project unit --reporter dot
 
