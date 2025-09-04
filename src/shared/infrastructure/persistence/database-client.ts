@@ -29,10 +29,8 @@ export class DatabaseClient<DbSchema extends Record<string, unknown> = any> {
 
   async init({
     connectionString,
-    waitForConnection,
   }: {
     connectionString: string;
-    waitForConnection: boolean;
   }): Promise<void> {
     const pool = new Pool({
       connectionString,
@@ -43,13 +41,11 @@ export class DatabaseClient<DbSchema extends Record<string, unknown> = any> {
       logger: false,
       casing: 'snake_case',
     });
-    if (waitForConnection) {
-      const isConnectionStablishResult = await this.isConnected();
-      if (!isConnectionStablishResult.ok) {
-        throw new Error('Database connection failed', {
-          cause: isConnectionStablishResult.error,
-        });
-      }
+    const isConnectionStablishResult = await this.isConnected();
+    if (!isConnectionStablishResult.ok) {
+      throw new Error('Database connection failed', {
+        cause: isConnectionStablishResult.error,
+      });
     }
   }
 }

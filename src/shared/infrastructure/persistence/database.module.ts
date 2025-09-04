@@ -11,7 +11,6 @@ import { DatabaseClient } from './database-client';
         const dbClient = new DatabaseClient();
         await dbClient.init({
           connectionString: environmentConfiguration.DATABASE_URL,
-          waitForConnection: true,
         });
         return dbClient;
       },
