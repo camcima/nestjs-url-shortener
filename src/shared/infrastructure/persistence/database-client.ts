@@ -5,13 +5,25 @@ import { Pool } from 'pg';
 export class DatabaseClient<DbSchema extends Record<string, unknown> = any> {
   connection: NodePgDatabase<DbSchema>;
 
-  private async checkSelf(): Promise<void> {
+  async isConnected(): Promise<
+    | {
+        ok: true;
+      }
+    | {
+        ok: false;
+        error: unknown;
+      }
+  > {
     try {
       await this.connection.execute(sql`SELECT 1`);
+      return {
+        ok: true,
+      };
     } catch (error) {
-      throw new Error('Database connection failed', {
-        cause: error,
-      });
+      return {
+        ok: false,
+        error: error,
+      };
     }
   }
 
@@ -32,7 +44,12 @@ export class DatabaseClient<DbSchema extends Record<string, unknown> = any> {
       casing: 'snake_case',
     });
     if (waitForConnection) {
-      await this.checkSelf();
+      const isConnectionStablishResult = await this.isConnected();
+      if (!isConnectionStablishResult.ok) {
+        throw new Error('Database connection failed', {
+          cause: isConnectionStablishResult.error,
+        });
+      }
     }
   }
 }

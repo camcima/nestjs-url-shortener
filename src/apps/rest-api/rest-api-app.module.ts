@@ -6,6 +6,7 @@ import {
 } from '@nestjs/common';
 import { APP_FILTER, APP_PIPE } from '@nestjs/core';
 
+import { HealthRestApiModule } from '../../health/presentation/rest-api/health-rest-api.module.js';
 import { TelemetryModule } from '../../shared/infrastructure/telemetry/telemetry.module.js';
 import { CatchAllExceptions } from '../../shared/presentation/rest-api/middlewares/catch-all-exceptions.filter';
 import { JsonBodyParserMiddleware } from '../../shared/presentation/rest-api/middlewares/json-body-parser.middleware';
@@ -13,7 +14,7 @@ import { UrlEncodedParserMiddleware } from '../../shared/presentation/rest-api/m
 import { ShortUrlRestApiModule } from '../../short-url/presentation/rest-api/short-url-rest-api.module';
 
 @Module({
-  imports: [TelemetryModule, ShortUrlRestApiModule],
+  imports: [TelemetryModule, HealthRestApiModule, ShortUrlRestApiModule],
   providers: [
     {
       provide: APP_PIPE,
