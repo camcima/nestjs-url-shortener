@@ -14,6 +14,13 @@ export class DatabaseClient<DbSchema extends Record<string, unknown> = any> {
         error: unknown;
       }
   > {
+    if (!this.connection) {
+      return {
+        ok: false,
+        error: new Error('Database connection is not initialized'),
+      };
+    }
+
     try {
       await this.connection.execute(sql`SELECT 1`);
       return {
