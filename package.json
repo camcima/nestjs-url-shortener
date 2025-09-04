@@ -13,7 +13,7 @@
     "build": "tsc --project tsconfig.build.json",
     "// ============================= apps ============================= //": "",
     "rest/start:prod": "node --env-file-if-exists=.env ./dist/apps/rest-api/rest-api.main.js",
-    "rest/start:dev": "nest start --watch --exec 'node --env-file=.env.local' --entryFile apps/rest-api/rest-api.main",
+    "rest/start:dev": "nest start --watch --exec 'node --env-file=.env' --entryFile apps/rest-api/rest-api.main",
     "// ============================ test ============================ //": "",
     "coverage": "vitest run --config ./test/vitest.config.ts --coverage",
     "watch-coverage": "vitest watch --config ./test/vitest.config.ts --coverage --ui",
@@ -28,11 +28,10 @@
     "format:check": "biome check --formatter-enabled=true --enforce-assist true",
     "// ============================== db ============================== //": "",
     "db:init": "dbmate up",
-    "db:reset": "dbmate drop && dbmate up",
-    "migrate": "DBMATE_MIGRATIONS_TABLE=schema_migrations dbmate --env-file .env.local up",
-    "migrate:new": "DBMATE_MIGRATIONS_TABLE=schema_migrations dbmate --env-file .env.local new",
-    "migrate:status": "DBMATE_MIGRATIONS_TABLE=schemax_migrations dbmate --env-file .env.local status@vitest/coverage-v8",
-    "migrate:rollback": "DBMATE_MIGRATIONS_TABLE=schema_migrations dbmate --env-file .env.local down"
+    "migrate": "dbmate up",
+    "migrate:new": "dbmate new",
+    "migrate:status": "dbmate status",
+    "migrate:rollback": "dbmate down"
   },
   "repository": {
     "type": "git",

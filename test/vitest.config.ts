@@ -33,6 +33,7 @@ export default mergeConfig(
         provider: 'v8',
         reporter: ['text', 'html'],
         reportsDirectory: './coverage',
+        ignoreEmptyLines: true,
         exclude: [
           ...coverageConfigDefaults.exclude,
 
