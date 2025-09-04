@@ -1,3 +1,4 @@
+import swc from 'unplugin-swc';
 import { loadEnv, mergeConfig } from 'vite';
 import {
   configDefaults,
@@ -8,6 +9,12 @@ import {
 export default mergeConfig(
   configDefaults,
   defineConfig({
+    plugins: [
+      // using swc to proper support TypeScript decorators metadata
+      swc.vite({
+        module: { type: 'es6' },
+      }),
+    ],
     test: {
       dir: 'test',
       environment: 'node',
