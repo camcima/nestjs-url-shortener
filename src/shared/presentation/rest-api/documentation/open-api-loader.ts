@@ -10,13 +10,6 @@ export function loadSwaggerForNestjsApp(app: INestApplication): void {
     const options = new DocumentBuilder()
       .setTitle('Shorten URL API')
       .setVersion('1.0.0')
-      .addBearerAuth({
-        type: 'http',
-        scheme: 'bearer',
-        bearerFormat: 'JWT',
-        description:
-          'Authentication to the API is performed via Bearer authentication. Provide your token as the bearer value.',
-      })
       .build();
 
     const document = SwaggerModule.createDocument(app, options);
