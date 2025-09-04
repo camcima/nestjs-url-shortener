@@ -62,6 +62,8 @@ export default mergeConfig(
 
             dir: 'test/e2e',
             include: ['**/*.e2e-spec.ts'],
+
+            setupFiles: [],
           },
         },
         {
@@ -70,7 +72,7 @@ export default mergeConfig(
             name: 'integration',
 
             dir: 'test/integration',
-            include: ['**/*.e2e-spec.ts'],
+            include: ['**/*.spec.ts'],
           },
         },
       ],
