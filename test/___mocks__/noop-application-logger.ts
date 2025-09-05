@@ -1,4 +1,4 @@
-import type { AppLoggerPort } from '../../src/shared/application-logger.service.port';
+import type { AppLoggerPort } from '../../src/shared/app-logger.port';
 
 export class NoopApplicationLoggerMock implements AppLoggerPort {
   setContext(): void {}

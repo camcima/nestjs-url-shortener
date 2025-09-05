@@ -1,6 +1,6 @@
 import { HealthIndicatorService } from '@nestjs/terminus';
 
-import { AppLoggerPort } from '../../../shared/application-logger.service.port';
+import { AppLoggerPort } from '../../../shared/app-logger.port';
 import { DatabaseClient } from '../../../shared/infrastructure/persistence/database-client';
 
 export class DatabaseHealthIndicatorService {

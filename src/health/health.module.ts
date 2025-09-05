@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { HealthIndicatorService, TerminusModule } from '@nestjs/terminus';
 
-import { AppLoggerPort } from '../shared/application-logger.service.port';
+import { AppLoggerPort } from '../shared/app-logger.port';
 import { LoggerModule } from '../shared/infrastructure/logger/logger.module';
 import { DatabaseModule } from '../shared/infrastructure/persistence/database.module';
 import { DatabaseClient } from '../shared/infrastructure/persistence/database-client';

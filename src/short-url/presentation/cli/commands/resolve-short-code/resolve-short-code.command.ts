@@ -1,7 +1,7 @@
 import { validateOrReject } from 'class-validator';
 import { Command, CommandRunner } from 'nest-commander';
 
-import { AppLoggerPort } from '../../../../../shared/application-logger.service.port';
+import { AppLoggerPort } from '../../../../../shared/app-logger.port';
 import { ResolveShortCodeUrlUseCase } from '../../../../application/use-cases/resolve-short-code-url.use-case';
 import { ResolveShortCodeCliToApplicationMapper } from './resolve-short-code-cli-to-application.mapper';
 import { ResolveShortCodeCommandInput } from './resolve-short-code-command-input';
