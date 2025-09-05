@@ -1,8 +1,8 @@
 import type { ShortUrl } from '../../../domain/entities/short-url.entity';
-import { ShortUrlReadDTO } from '../dtos/short-url.read-dto';
+import { ShortUrlResponseDTO } from '../dtos/short-url.dto';
 
 export class ShortenUrlApplicationToRestApiMapper {
-  static toShortUrlReadDTO(entity: ShortUrl): ShortUrlReadDTO {
+  static toShortUrlReadDTO(entity: ShortUrl): ShortUrlResponseDTO {
     return {
       uuid: entity.uuid,
       destination_url: entity.destinationUrl,
