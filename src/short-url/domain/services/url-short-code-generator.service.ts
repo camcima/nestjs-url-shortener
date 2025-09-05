@@ -1,7 +1,10 @@
 import * as crypto from 'node:crypto';
 
+import { Injectable } from '@nestjs/common';
+
 import { ShortCodeVO } from '../../../short-url/domain/value-objects/short-code.vo';
 
+@Injectable()
 export class UrlShortCodeGeneratorService {
   private getSecureRandomInt(max: number): number {
     const randomBytes = crypto.randomBytes(4).readUInt32BE(0);

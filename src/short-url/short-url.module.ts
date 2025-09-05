@@ -23,10 +23,7 @@ import { ShortCodeDbRepository } from './infrastructure/repositories/short-code.
 
     {
       provide: UrlShortCodeGeneratorService,
-      inject: [],
-      useFactory: () => {
-        return new UrlShortCodeGeneratorService();
-      },
+      useClass: UrlShortCodeGeneratorService,
     },
     {
       provide: ShortenUrlUseCase,
@@ -51,10 +48,7 @@ import { ShortCodeDbRepository } from './infrastructure/repositories/short-code.
     },
     {
       provide: ResolveShortCodeUrlUseCase,
-      inject: [ShortCodeRepositoryPort],
-      useFactory: (shortCodeRepository: ShortCodeRepositoryPort) => {
-        return new ResolveShortCodeUrlUseCase(shortCodeRepository);
-      },
+      useClass: ResolveShortCodeUrlUseCase,
     },
   ],
   exports: [ShortenUrlUseCase, ResolveShortCodeUrlUseCase],
