@@ -1,0 +1,59 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: urlshortener
+      POSTGRES_USER: urlshortener
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_HOST_AUTH_METHOD: trust
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U urlshortener -d urlshortener"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+      - "9464:9464"  # Prometheus metrics
+    environment:
+      NODE_ENV: development
+      REST_API_APP_PORT: 3000
+      DATABASE_URL: postgresql://urlshortener:${POSTGRES_PASSWORD}@postgres:5432/urlshortener?sslmode=disable
+      TELEMETRY_SERVICE_NAME: url-shortener
+      TELEMETRY_PROMETHEUS_PORT: 9464
+      TELEMETRY_OTLP_URL: http://localhost:4318/traces
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: >
+      sh -c "
+        echo '🔧 Starting application initialization...' &&
+        echo '⏳ Waiting for PostgreSQL to be ready...' &&
+        until pg_isready -h $${DB_HOST} -p $${DB_PORT} -U $${DB_USER} -d $${DB_NAME}; do
+          echo 'Waiting for PostgreSQL...';
+          sleep 2;
+        done &&
+        echo '✅ PostgreSQL is ready!' &&
+        echo '🔄 Running database migrations...' &&
+        pnpm migrate &&
+        echo '✅ Migrations completed!' &&
+        echo '🚀 Starting NestJS application...' &&
+        pnpm rest/start:dev
+      "
+
+volumes:
+  postgres_data:

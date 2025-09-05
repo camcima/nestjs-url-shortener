@@ -1,0 +1,84 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "files": {
+    "ignoreUnknown": true,
+    "includes": ["**", "!**/lib", "!**/dist"]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2
+  },
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": {
+          "level": "on",
+          "options": {
+            "identifierOrder": "lexicographic",
+            "groups": [
+              [":URL:", ":NODE:"],
+              ":BLANK_LINE:",
+              ":PACKAGE:",
+              ":BLANK_LINE:",
+              ":ALIAS:",
+              ":BLANK_LINE:",
+              ":PATH:"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "nursery": {
+        "useExplicitType": "off", // disabled because of unsupport for return types only
+        "noFloatingPromises": "error"
+      },
+      "suspicious": {
+        "noConsole": "info",
+        "noExplicitAny": "off" // disabled due to false positives on TypeScript generics
+      },
+      "correctness": {
+        "noUnusedVariables": "info",
+        "noUnusedFunctionParameters": "off", // due to NestJS decorators
+        "useImportExtensions": "off"
+      },
+      "style": {
+        "useImportType": "off", // to support class instrospection via NestJS decorators
+        "useTemplate": "error",
+        "noCommonJs": "off",
+        "noNamespace": "error",
+        "useNodejsImportProtocol": "info",
+        "noEnum": "off",
+        "useConst": "error"
+      },
+      "complexity": {
+        "recommended": false
+      }
+    }
+  },
+  "javascript": {
+    "parser": {
+      "unsafeParameterDecoratorsEnabled": true // due to NestJS decorators
+    },
+    "formatter": {
+      "enabled": true,
+      "quoteStyle": "single",
+      "semicolons": "always",
+      "arrowParentheses": "always",
+      "lineWidth": 80,
+      "indentWidth": 2,
+      "indentStyle": "space",
+      "lineEnding": "lf"
+    }
+  }
+}
