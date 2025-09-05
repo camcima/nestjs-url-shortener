@@ -38,7 +38,7 @@ export class ShortenUrlUseCase {
       const givenShortCode = ShortCode.of(input.shortCodeValueToUse);
       const maybeShortUrlSameShortCode =
         await this.shortCodeRepository.findByShortCode(givenShortCode);
-      if (!!maybeShortUrlSameShortCode) {
+      if (!isNil(maybeShortUrlSameShortCode)) {
         throw new ShortCodeAlreadyTakenError(givenShortCode);
       }
 

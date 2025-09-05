@@ -1,10 +1,17 @@
+import dotenv from 'dotenv';
 import swc from 'unplugin-swc';
-import { loadEnv, mergeConfig } from 'vite';
+import { mergeConfig } from 'vite';
 import {
   configDefaults,
   coverageConfigDefaults,
   defineConfig,
 } from 'vitest/config';
+
+dotenv.config({
+  path: ['.env.test', '.env'],
+  override: false,
+  quiet: true,
+});
 
 export default mergeConfig(
   configDefaults,
@@ -25,7 +32,7 @@ export default mergeConfig(
         ignoreSourceErrors: true,
       },
       globals: true,
-      env: loadEnv('test', process.cwd(), ''),
+      // env: loadEnv('test', process.cwd(), ''), // done via `dotenv`
 
       coverage: {
         enabled: false, // not generate coverage by default

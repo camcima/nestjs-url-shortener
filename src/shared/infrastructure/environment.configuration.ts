@@ -11,6 +11,6 @@ export const environmentConfiguration = cleanEnv(process.env, {
   DATABASE_URL: str(),
 
   TELEMETRY_SERVICE_NAME: str(),
-  TELEMETRY_PROMETHEUS_PORT: port({ default: 9464 }),
+  TELEMETRY_PROMETHEUS_PORT: port(),
   TELEMETRY_OTLP_URL: str(),
 });
