@@ -17,4 +17,10 @@ import { DatabaseClient } from './database-client';
   ],
   exports: [DatabaseClient],
 })
-export class DatabaseModule {}
+export class DatabaseModule {
+  constructor(private readonly databaseClient: DatabaseClient) {}
+
+  async onModuleDestroy() {
+    await this.databaseClient.closeConnection();
+  }
+}

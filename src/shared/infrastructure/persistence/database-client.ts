@@ -4,6 +4,7 @@ import { Pool } from 'pg';
 
 export class DatabaseClient<DbSchema extends Record<string, unknown> = any> {
   connection: NodePgDatabase<DbSchema>;
+  private pool: Pool;
 
   private constructor() {}
 
@@ -43,12 +44,12 @@ export class DatabaseClient<DbSchema extends Record<string, unknown> = any> {
   }): Promise<DatabaseClient> {
     const dbClient = new DatabaseClient();
 
-    const pool = new Pool({
+    dbClient.pool = new Pool({
       connectionString,
       ssl: true,
     });
     dbClient.connection = drizzle({
-      client: pool,
+      client: dbClient.pool,
       logger: false,
       casing: 'snake_case',
     });
@@ -60,5 +61,9 @@ export class DatabaseClient<DbSchema extends Record<string, unknown> = any> {
     }
 
     return dbClient;
+  }
+
+  async closeConnection(): Promise<void> {
+    await this.pool.end();
   }
 }
