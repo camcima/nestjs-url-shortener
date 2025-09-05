@@ -18,6 +18,8 @@ import { DatabaseHealthIndicatorService } from './domain/services/database-healt
         databaseClient: DatabaseClient,
         healthIndicatorService: HealthIndicatorService,
       ) => {
+        appLogger.setContext(DatabaseHealthIndicatorService.name);
+
         return new DatabaseHealthIndicatorService(
           appLogger,
           databaseClient,
