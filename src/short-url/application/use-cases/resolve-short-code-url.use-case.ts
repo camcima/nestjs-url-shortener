@@ -4,13 +4,13 @@ import { isNil } from '../../../shared/utils/misc.utils';
 import type { ShortUrl } from '../../domain/entities/short-url.entity';
 import { ShortCodeNotFoundError } from '../../domain/errors/short-code-not-found.error';
 import { ShortCodeRepositoryPort } from '../../domain/repositories/short-code.repository.port';
-import type { ShortCodeVO } from '../../domain/value-objects/short-code.vo';
+import type { ShortCode } from '../../domain/value-objects/short-code.vo';
 
 export type IResolveShortCodeInputDTO = {
   /**
    * The short code to resolve the URL for.
    */
-  shortCodeToResolve: ShortCodeVO;
+  shortCodeToResolve: ShortCode;
 };
 
 @Injectable()

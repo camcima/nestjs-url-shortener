@@ -2,7 +2,7 @@ import * as crypto from 'node:crypto';
 
 import { Injectable } from '@nestjs/common';
 
-import { ShortCodeVO } from '../../../short-url/domain/value-objects/short-code.vo';
+import { ShortCode } from '../../../short-url/domain/value-objects/short-code.vo';
 
 @Injectable()
 export class UrlShortCodeGeneratorService {
@@ -11,7 +11,7 @@ export class UrlShortCodeGeneratorService {
     return randomBytes % max;
   }
 
-  generate(): ShortCodeVO {
+  generate(): ShortCode {
     const alphabet =
       'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
 
@@ -25,6 +25,6 @@ export class UrlShortCodeGeneratorService {
       code += alphabet[randomIndex];
     }
 
-    return ShortCodeVO.of(code);
+    return ShortCode.of(code);
   }
 }

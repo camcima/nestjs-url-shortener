@@ -1,14 +1,14 @@
-import type { ShortCodeVO } from '../value-objects/short-code.vo';
+import type { ShortCode } from '../value-objects/short-code.vo';
 
 export class ShortUrl {
   readonly uuid: string;
-  readonly shortCode: ShortCodeVO;
+  readonly shortCode: ShortCode;
   readonly destinationUrl: string;
   readonly generatedAt: Date;
 
   constructor(props: {
     uuid: string;
-    shortCode: ShortCodeVO;
+    shortCode: ShortCode;
     destinationUrl: string;
     generatedAt: Date;
   }) {

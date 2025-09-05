@@ -2,7 +2,7 @@ import crypto from 'node:crypto';
 
 import { AppLoggerPort } from '../../../shared/app-logger.port';
 import { isNil } from '../../../shared/utils/misc.utils';
-import { ShortCodeVO } from '../../../short-url/domain/value-objects/short-code.vo';
+import { ShortCode } from '../../../short-url/domain/value-objects/short-code.vo';
 import { ShortUrl } from '../../domain/entities/short-url.entity';
 import { ShortCodeAlreadyTakenError } from '../../domain/errors/short-code-already-taken.error';
 import { ShortCodeRepositoryPort } from '../../domain/repositories/short-code.repository.port';
@@ -31,11 +31,11 @@ export class ShortenUrlUseCase {
    * @throws {ShortCodeAlreadyTakenError}
    */
   async execute(input: IShortenUrlInputDTO): Promise<ShortUrl> {
-    let shortCodeToUse: ShortCodeVO;
+    let shortCodeToUse: ShortCode;
     if (isNil(input.shortCodeValueToUse)) {
       shortCodeToUse = this.urlShortCodeGeneratorService.generate();
     } else {
-      const givenShortCode = ShortCodeVO.of(input.shortCodeValueToUse);
+      const givenShortCode = ShortCode.of(input.shortCodeValueToUse);
       const maybeShortUrlSameShortCode =
         await this.shortCodeRepository.findByShortCode(givenShortCode);
       if (!!maybeShortUrlSameShortCode) {

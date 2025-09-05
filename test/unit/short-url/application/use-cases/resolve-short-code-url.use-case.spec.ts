@@ -5,7 +5,7 @@ import {
 import type { ShortUrl } from '../../../../../src/short-url/domain/entities/short-url.entity';
 import { ShortCodeNotFoundError } from '../../../../../src/short-url/domain/errors/short-code-not-found.error';
 import type { ShortCodeRepositoryPort } from '../../../../../src/short-url/domain/repositories/short-code.repository.port';
-import { ShortCodeVO } from '../../../../../src/short-url/domain/value-objects/short-code.vo';
+import { ShortCode } from '../../../../../src/short-url/domain/value-objects/short-code.vo';
 
 describe('ResolveShortCodeUrlUseCase', () => {
   let shortenUrlUseCase: ResolveShortCodeUrlUseCase;
@@ -29,7 +29,7 @@ describe('ResolveShortCodeUrlUseCase', () => {
           uuid: crypto.randomUUID(),
           destinationUrl: 'https://google.com',
           generatedAt: new Date(),
-          shortCode: ShortCodeVO.of('abcdef'),
+          shortCode: ShortCode.of('abcdef'),
         };
         shortCodeRepositoryMock.findByShortCode = vi
           .fn()
@@ -52,7 +52,7 @@ describe('ResolveShortCodeUrlUseCase', () => {
           .mockResolvedValue(null);
 
         const inputDto: IResolveShortCodeInputDTO = {
-          shortCodeToResolve: ShortCodeVO.of('abcdef'),
+          shortCodeToResolve: ShortCode.of('abcdef'),
         };
 
         await expect(() =>
