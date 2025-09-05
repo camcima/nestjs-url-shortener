@@ -5,6 +5,31 @@
 - _Driving adapter_: como o mundo externo conversa com a aplicação (entrada). Entram com input e disparam casos de uso. Exemplos: REST Controller, GraphQL Resolver, CLI.
 - _Driven adapter_: como a aplicação conversa com o mundo externo (saída). Implementam dependências externas chamadas pelos casos de uso. Exemplos: Repositórios (DB), APIs externas, Message brokers.
 
+## Grafo de dependência entre módulos
+
+```mermaid
+graph LR
+  RestApiAppModule-->TelemetryModule
+  TelemetryModule-->OpenTelemetryModule
+  OpenTelemetryModule-->LoggerModule
+  TelemetryModule-->LoggerModule
+  RestApiAppModule-->HealthRestApiModule
+  HealthRestApiModule-->HealthModule
+  HealthModule-->LoggerModule
+  HealthModule-->DatabaseModule
+  DatabaseModule-->LoggerModule
+  HealthModule-->TerminusModule
+  TerminusModule-->LoggerModule
+  HealthRestApiModule-->LoggerModule
+  RestApiAppModule-->ShortUrlRestApiModule
+  ShortUrlRestApiModule-->ShortUrlModule
+  ShortUrlModule-->LoggerModule
+  ShortUrlModule-->DatabaseModule
+  ShortUrlRestApiModule-->LoggerModule
+  RestApiAppModule-->LoggerModule
+```
+
+
 ## Organização dos arquivos
 
 ### Em `src/apps/`
