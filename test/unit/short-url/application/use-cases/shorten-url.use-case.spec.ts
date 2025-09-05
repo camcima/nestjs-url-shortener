@@ -7,7 +7,7 @@ import { ShortUrl } from '../../../../../src/short-url/domain/entities/short-url
 import { ShortCodeAlreadyTakenError } from '../../../../../src/short-url/domain/errors/short-code-already-taken.error';
 import type { ShortCodeRepositoryPort } from '../../../../../src/short-url/domain/repositories/short-code.repository.port';
 import type { UrlShortCodeGeneratorService } from '../../../../../src/short-url/domain/services/url-short-code-generator.service';
-import { ShortCodeVO } from '../../../../../src/short-url/domain/value-objects/short-code.vo';
+import { ShortCode } from '../../../../../src/short-url/domain/value-objects/short-code.vo';
 import { NoopApplicationLoggerMock } from '../../../../___mocks__/noop-application-logger';
 
 describe('ShortenUrlUseCase', () => {
@@ -43,12 +43,12 @@ describe('ShortenUrlUseCase', () => {
           shortCodeRepositoryMock.save = vi.fn().mockResolvedValue(undefined);
           urlShortCodeGeneratorServiceMock.generate = vi
             .fn()
-            .mockReturnValue(ShortCodeVO.of('abcdef'));
+            .mockReturnValue(ShortCode.of('abcdef'));
           const dummyExistingShortUrl = new ShortUrl({
             uuid: crypto.randomUUID(),
             destinationUrl: 'https://google.com',
             generatedAt: new Date(),
-            shortCode: ShortCodeVO.of('abcdef'),
+            shortCode: ShortCode.of('abcdef'),
           });
           shortCodeRepositoryMock.findByShortCode = vi
             .fn()
@@ -72,7 +72,7 @@ describe('ShortenUrlUseCase', () => {
           shortCodeRepositoryMock.save = vi.fn().mockResolvedValue(undefined);
           urlShortCodeGeneratorServiceMock.generate = vi
             .fn()
-            .mockReturnValue(ShortCodeVO.of('abcdef'));
+            .mockReturnValue(ShortCode.of('abcdef'));
           shortCodeRepositoryMock.findByShortCode = vi
             .fn()
             .mockResolvedValue(null);
@@ -97,7 +97,7 @@ describe('ShortenUrlUseCase', () => {
         shortCodeRepositoryMock.save = vi.fn().mockResolvedValue(undefined);
         urlShortCodeGeneratorServiceMock.generate = vi
           .fn()
-          .mockReturnValue(ShortCodeVO.of('hjikfl'));
+          .mockReturnValue(ShortCode.of('hjikfl'));
         shortCodeRepositoryMock.findByShortCode = vi
           .fn()
           .mockResolvedValue(null);

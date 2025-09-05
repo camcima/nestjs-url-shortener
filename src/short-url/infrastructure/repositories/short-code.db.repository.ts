@@ -2,13 +2,13 @@ import { eq } from 'drizzle-orm';
 
 import { ShortUrl } from '../../domain/entities/short-url.entity';
 import type { ShortCodeRepositoryPort } from '../../domain/repositories/short-code.repository.port';
-import { ShortCodeVO } from '../../domain/value-objects/short-code.vo';
+import { ShortCode } from '../../domain/value-objects/short-code.vo';
 import { IDatabaseClient, shortUrlDbSchema } from '../persistence';
 
 export class ShortCodeDbRepository implements ShortCodeRepositoryPort {
   constructor(private readonly dbClient: IDatabaseClient) {}
 
-  async findByShortCode(shortCode: ShortCodeVO): Promise<ShortUrl | null> {
+  async findByShortCode(shortCode: ShortCode): Promise<ShortUrl | null> {
     const db = this.dbClient.connection;
 
     const results = await db
@@ -25,7 +25,7 @@ export class ShortCodeDbRepository implements ShortCodeRepositoryPort {
     if (maybeRow) {
       return new ShortUrl({
         uuid: maybeRow.uuid,
-        shortCode: ShortCodeVO.of(maybeRow.short_code),
+        shortCode: ShortCode.of(maybeRow.short_code),
         destinationUrl: maybeRow.destination_url,
         generatedAt: maybeRow.created_at,
       });

@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class ShortUrlReadDTO {
+export class ShortUrlResponseDTO {
   @ApiProperty()
   uuid: string;
 

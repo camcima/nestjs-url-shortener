@@ -1,11 +1,11 @@
 import { InvalidShortCodeError } from '../../../../../src/short-url/domain/errors/invalid-short-code.error';
-import { ShortCodeVO } from '../../../../../src/short-url/domain/value-objects/short-code.vo';
+import { ShortCode } from '../../../../../src/short-url/domain/value-objects/short-code.vo';
 
 describe('ShortCodeVO', () => {
   describe('when the given short code is valid', () => {
     describe('.of()', () => {
       it('should create a valid short code', () => {
-        const shortCode = ShortCodeVO.of('abcdef');
+        const shortCode = ShortCode.of('abcdef');
 
         expect(shortCode.value).toEqual('abcdef');
         expect(shortCode.toString()).toEqual('abcdef');
@@ -14,8 +14,8 @@ describe('ShortCodeVO', () => {
 
     describe('#equals()', () => {
       it('should return true when the same short code value is used', () => {
-        const shortCodeA = ShortCodeVO.of('abcdef');
-        const shortCodeB = ShortCodeVO.of('abcdef');
+        const shortCodeA = ShortCode.of('abcdef');
+        const shortCodeB = ShortCode.of('abcdef');
 
         expect(shortCodeA === shortCodeB).toBe(false);
         expect(shortCodeA.equals(shortCodeB)).toBe(true);
@@ -25,7 +25,7 @@ describe('ShortCodeVO', () => {
 
     describe('#toString()', () => {
       it('should return the short code value as string', () => {
-        const shortCode = ShortCodeVO.of('abcdef');
+        const shortCode = ShortCode.of('abcdef');
 
         expect(shortCode.toString()).toBe('abcdef');
       });
@@ -35,21 +35,19 @@ describe('ShortCodeVO', () => {
   describe('when the given short code is invalid', () => {
     describe('.of()', () => {
       it('should throw an error when the short code is an empty string', () => {
-        expect(() => ShortCodeVO.of('')).toThrowError(InvalidShortCodeError);
+        expect(() => ShortCode.of('')).toThrowError(InvalidShortCodeError);
       });
 
       it('should throw an error when the short code contains invalid characters', () => {
-        expect(() => ShortCodeVO.of('abc$%')).toThrowError(
-          InvalidShortCodeError,
-        );
+        expect(() => ShortCode.of('abc$%')).toThrowError(InvalidShortCodeError);
       });
 
       it('should throw an error when the short code is too short', () => {
-        expect(() => ShortCodeVO.of('ab')).toThrowError(InvalidShortCodeError);
+        expect(() => ShortCode.of('ab')).toThrowError(InvalidShortCodeError);
       });
 
       it('should throw an error when the short code is too long', () => {
-        expect(() => ShortCodeVO.of('a'.repeat(31))).toThrowError(
+        expect(() => ShortCode.of('a'.repeat(31))).toThrowError(
           InvalidShortCodeError,
         );
       });
