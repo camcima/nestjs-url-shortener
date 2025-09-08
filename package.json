@@ -71,7 +71,6 @@
     "envalid": "^8.1.0",
     "express": "^5.1.0",
     "nest-commander": "^3.19.1",
-    "nest-problem-details-filter": "^1.0.0",
     "nestjs-cls": "^6.0.1",
     "nestjs-otel": "^7.0.1",
     "nestjs-pino": "^4.4.0",

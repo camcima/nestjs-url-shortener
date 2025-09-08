@@ -80,9 +80,6 @@ importers:
       nest-commander:
         specifier: ^3.19.1
         version: 3.19.1(@nestjs/common@11.1.6(class-transformer@0.5.1)(class-validator@0.14.2)(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@11.1.6)(@types/inquirer@8.2.12)(@types/node@24.3.0)(typescript@5.9.2)
-      nest-problem-details-filter:
-        specifier: ^1.0.0
-        version: 1.0.0
       nestjs-cls:
         specifier: ^6.0.1
         version: 6.0.1(@nestjs/common@11.1.6(class-transformer@0.5.1)(class-validator@0.14.2)(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@11.1.6)(reflect-metadata@0.2.2)(rxjs@7.8.2)
@@ -3322,9 +3319,6 @@ packages:
       '@nestjs/common': ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0
       '@nestjs/core': ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0
       '@types/inquirer': ^8.1.3
-
-  nest-problem-details-filter@1.0.0:
-    resolution: {integrity: sha512-+Jf2THGKzPGsSYn3qV84d3KbWQ2Q3C78jN00giaB8kzo9hVBIPQT3vMVrTgrYMWIsBPLQptnDV/tGZ1AESUIVg==}
 
   nestjs-cls@6.0.1:
     resolution: {integrity: sha512-FnU8MI5/RKdbNvGmlUMD7nuFs7zUiueNzTjO+sxj7BJbsf7cUmosarppPLXRJ7C1WaZ/gLE9ZAcM6//0q1CQIA==}
@@ -7547,8 +7541,6 @@ snapshots:
     transitivePeerDependencies:
       - '@types/node'
       - typescript
-
-  nest-problem-details-filter@1.0.0: {}
 
   nestjs-cls@6.0.1(@nestjs/common@11.1.6(class-transformer@0.5.1)(class-validator@0.14.2)(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@11.1.6)(reflect-metadata@0.2.2)(rxjs@7.8.2):
     dependencies:
