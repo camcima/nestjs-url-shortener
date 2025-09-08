@@ -29,11 +29,11 @@
     "format": "biome check --formatter-enabled=true --enforce-assist true --no-errors-on-unmatched --write",
     "format:check": "biome check --formatter-enabled=true --enforce-assist true",
     "// ============================== db ============================== //": "",
-    "db:init": "dbmate up",
-    "migrate": "dbmate up",
-    "migrate:new": "dbmate new",
-    "migrate:status": "dbmate status",
-    "migrate:rollback": "dbmate down"
+    "db:init": "dbmate --env DATABASE_URL up",
+    "migrate": "dbmate --env DATABASE_URL up",
+    "migrate:new": "dbmate --env DATABASE_URL new",
+    "migrate:status": "dbmate --env DATABASE_URL status",
+    "migrate:rollback": "dbmate --env DATABASE_URL down"
   },
   "repository": {
     "type": "git",
