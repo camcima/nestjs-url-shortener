@@ -29,7 +29,11 @@ services:
     environment:
       NODE_ENV: development
       REST_API_APP_PORT: 3000
-      DATABASE_URL: postgresql://urlshortener:${POSTGRES_PASSWORD}@postgres:5432/urlshortener?sslmode=disable
+      DB_HOST: ep-bold-breeze-abc-pooler.us-east-2.aws.neon.tech
+      DB_USER: urlshortener
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+      DB_PORT: 5432
+      DB_NAME: urlshortener
       TELEMETRY_SERVICE_NAME: url-shortener
       TELEMETRY_PROMETHEUS_PORT: 9464
       TELEMETRY_OTLP_URL: http://localhost:4318/traces

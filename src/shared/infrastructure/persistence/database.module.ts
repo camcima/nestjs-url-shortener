@@ -9,7 +9,13 @@ import { DatabaseClient } from './database-client';
       provide: DatabaseClient,
       useFactory: async () => {
         const dbClient = await DatabaseClient.init({
-          connectionString: environmentConfiguration.DATABASE_URL,
+          connectionParams: {
+            host: environmentConfiguration.DB_HOST,
+            user: environmentConfiguration.DB_USER,
+            password: environmentConfiguration.DB_PASSWORD,
+            port: environmentConfiguration.DB_PORT,
+            database: environmentConfiguration.DB_NAME,
+          },
         });
         return dbClient;
       },

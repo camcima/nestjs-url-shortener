@@ -8,7 +8,11 @@ export const environmentConfiguration = cleanEnv(process.env, {
     choices: ['debug', 'error', 'info'],
   }),
 
-  DATABASE_URL: str(),
+  DB_HOST: str(),
+  DB_PORT: port(),
+  DB_USER: str(),
+  DB_NAME: str(),
+  DB_PASSWORD: str(),
 
   TELEMETRY_SERVICE_NAME: str(),
   TELEMETRY_PROMETHEUS_PORT: port(),

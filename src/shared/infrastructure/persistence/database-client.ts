@@ -38,14 +38,24 @@ export class DatabaseClient<DbSchema extends Record<string, unknown> = any> {
   }
 
   static async init({
-    connectionString,
+    connectionParams,
   }: {
-    connectionString: string;
+    connectionParams: {
+      host: string;
+      user: string;
+      password?: string;
+      port: number;
+      database: string;
+    };
   }): Promise<DatabaseClient> {
     const dbClient = new DatabaseClient();
 
     dbClient.pool = new Pool({
-      connectionString,
+      host: connectionParams.host,
+      user: connectionParams.user,
+      password: connectionParams.password,
+      port: connectionParams.port,
+      database: connectionParams.database,
       ssl: true,
     });
     dbClient.connection = drizzle({
