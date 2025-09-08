@@ -1,4 +1,4 @@
-import { VersioningType } from '@nestjs/common';
+import { Logger as NestLogger, VersioningType } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import type { NestExpressApplication } from '@nestjs/platform-express';
 import { Logger } from 'nestjs-pino';
@@ -34,4 +34,12 @@ async function bootstrap() {
 
   await app.listen(environmentConfiguration.REST_API_APP_PORT);
 }
-void bootstrap();
+
+// Only run bootstrap if this file is executed directly (not imported)
+if (require.main === module) {
+  bootstrap().catch((err) => {
+    const logger = new NestLogger('bootstrap');
+    logger.error('Failed to start application:', err);
+    process.exit(1);
+  });
+}
