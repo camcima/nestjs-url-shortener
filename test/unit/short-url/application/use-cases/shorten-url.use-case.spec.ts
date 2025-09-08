@@ -8,7 +8,7 @@ import { ShortCodeAlreadyTakenError } from '../../../../../src/short-url/domain/
 import type { ShortCodeRepositoryPort } from '../../../../../src/short-url/domain/repositories/short-code.repository.port';
 import type { UrlShortCodeGeneratorService } from '../../../../../src/short-url/domain/services/url-short-code-generator.service';
 import { ShortCode } from '../../../../../src/short-url/domain/value-objects/short-code.vo';
-import { NoopApplicationLoggerMock } from '../../../../___mocks__/noop-application-logger';
+import { NoopApplicationLoggerMock } from '../../../../___mocks___/noop-application-logger';
 
 describe('ShortenUrlUseCase', () => {
   let shortenUrlUseCase: ShortenUrlUseCase;
