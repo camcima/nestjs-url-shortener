@@ -1,3 +1,5 @@
+import { DeepMockProxy, mock } from 'vitest-mock-extended';
+
 import {
   type IResolveShortCodeInputDTO,
   ResolveShortCodeUrlUseCase,
@@ -10,14 +12,10 @@ import { ShortCode } from '../../../../../src/short-url/domain/value-objects/sho
 describe('ResolveShortCodeUrlUseCase', () => {
   let shortenUrlUseCase: ResolveShortCodeUrlUseCase;
   // dependencies
-  let shortCodeRepositoryMock: ShortCodeRepositoryPort;
+  let shortCodeRepositoryMock: DeepMockProxy<ShortCodeRepositoryPort>;
 
   beforeEach(() => {
-    // TODO: find a better way to create mocks knowing that the deps might depend on other deps. because we are knowing too much about the deps structure when creating the mocks
-
-    shortCodeRepositoryMock = {
-      findByShortCode: vi.fn(),
-    } as unknown as ShortCodeRepositoryPort;
+    shortCodeRepositoryMock = mock();
 
     shortenUrlUseCase = new ResolveShortCodeUrlUseCase(shortCodeRepositoryMock);
   });
@@ -31,9 +29,9 @@ describe('ResolveShortCodeUrlUseCase', () => {
           generatedAt: new Date(),
           shortCode: ShortCode.of('abcdef'),
         };
-        shortCodeRepositoryMock.findByShortCode = vi
-          .fn()
-          .mockResolvedValue(dummyExistingShortUrl);
+        shortCodeRepositoryMock.findByShortCode.mockResolvedValue(
+          dummyExistingShortUrl,
+        );
 
         const inputDto: IResolveShortCodeInputDTO = {
           shortCodeToResolve: dummyExistingShortUrl.shortCode,
@@ -47,9 +45,7 @@ describe('ResolveShortCodeUrlUseCase', () => {
 
     describe('When the given short code does not exist', () => {
       it('should throw the `ShortCodeNotFoundError` exception', async () => {
-        shortCodeRepositoryMock.findByShortCode = vi
-          .fn()
-          .mockResolvedValue(null);
+        shortCodeRepositoryMock.findByShortCode.mockResolvedValue(null);
 
         const inputDto: IResolveShortCodeInputDTO = {
           shortCodeToResolve: ShortCode.of('abcdef'),

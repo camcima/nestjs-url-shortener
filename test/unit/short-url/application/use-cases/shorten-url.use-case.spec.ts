@@ -1,3 +1,5 @@
+import { DeepMockProxy, mock } from 'vitest-mock-extended';
+
 import type { AppLoggerPort } from '../../../../../src/shared/app-logger.port';
 import {
   type IShortenUrlInputDTO,
@@ -14,20 +16,13 @@ describe('ShortenUrlUseCase', () => {
   let shortenUrlUseCase: ShortenUrlUseCase;
   // dependencies
   let loggerMock: AppLoggerPort;
-  let urlShortCodeGeneratorServiceMock: UrlShortCodeGeneratorService;
-  let shortCodeRepositoryMock: ShortCodeRepositoryPort;
+  let urlShortCodeGeneratorServiceMock: DeepMockProxy<UrlShortCodeGeneratorService>;
+  let shortCodeRepositoryMock: DeepMockProxy<ShortCodeRepositoryPort>;
 
   beforeEach(() => {
-    // TODO: find a better way to create mocks knowing that the deps might depend on other deps. because we are knowing too much about the deps structure when creating the mocks
-
     loggerMock = new NoopApplicationLoggerMock();
-
-    urlShortCodeGeneratorServiceMock =
-      {} as unknown as UrlShortCodeGeneratorService;
-
-    shortCodeRepositoryMock = {
-      findByShortCode: vi.fn(),
-    } as unknown as ShortCodeRepositoryPort;
+    urlShortCodeGeneratorServiceMock = mock();
+    shortCodeRepositoryMock = mock();
 
     shortenUrlUseCase = new ShortenUrlUseCase(
       loggerMock,
@@ -40,19 +35,19 @@ describe('ShortenUrlUseCase', () => {
     describe('When the short is supplied', () => {
       describe('And the short code is already taken', () => {
         it('should throw the `ShortCodeAlreadyTakenError` exception', async () => {
-          shortCodeRepositoryMock.save = vi.fn().mockResolvedValue(undefined);
-          urlShortCodeGeneratorServiceMock.generate = vi
-            .fn()
-            .mockReturnValue(ShortCode.of('abcdef'));
+          shortCodeRepositoryMock.save.mockResolvedValue(undefined);
+          urlShortCodeGeneratorServiceMock.generate.mockReturnValue(
+            ShortCode.of('abcdef'),
+          );
           const dummyExistingShortUrl = new ShortUrl({
             uuid: crypto.randomUUID(),
             destinationUrl: 'https://google.com',
             generatedAt: new Date(),
             shortCode: ShortCode.of('abcdef'),
           });
-          shortCodeRepositoryMock.findByShortCode = vi
-            .fn()
-            .mockResolvedValue(dummyExistingShortUrl);
+          shortCodeRepositoryMock.findByShortCode.mockResolvedValue(
+            dummyExistingShortUrl,
+          );
 
           const inputDto: IShortenUrlInputDTO = {
             destinationUrl: 'https://google.com.br',
@@ -69,13 +64,11 @@ describe('ShortenUrlUseCase', () => {
 
       describe('And the short code is not taken', () => {
         it('should shorten a URL with a given short code', async () => {
-          shortCodeRepositoryMock.save = vi.fn().mockResolvedValue(undefined);
-          urlShortCodeGeneratorServiceMock.generate = vi
-            .fn()
-            .mockReturnValue(ShortCode.of('abcdef'));
-          shortCodeRepositoryMock.findByShortCode = vi
-            .fn()
-            .mockResolvedValue(null);
+          shortCodeRepositoryMock.save.mockResolvedValue(undefined);
+          urlShortCodeGeneratorServiceMock.generate.mockReturnValue(
+            ShortCode.of('abcdef'),
+          );
+          shortCodeRepositoryMock.findByShortCode.mockResolvedValue(null);
 
           const inputDto: IShortenUrlInputDTO = {
             destinationUrl: 'https://google.com.br',
@@ -94,13 +87,11 @@ describe('ShortenUrlUseCase', () => {
 
     describe('When the short code is not supplied', () => {
       it('should shorten a URL with a random generated short code', async () => {
-        shortCodeRepositoryMock.save = vi.fn().mockResolvedValue(undefined);
-        urlShortCodeGeneratorServiceMock.generate = vi
-          .fn()
-          .mockReturnValue(ShortCode.of('hjikfl'));
-        shortCodeRepositoryMock.findByShortCode = vi
-          .fn()
-          .mockResolvedValue(null);
+        shortCodeRepositoryMock.save.mockResolvedValue(undefined);
+        urlShortCodeGeneratorServiceMock.generate.mockReturnValue(
+          ShortCode.of('hjikfl'),
+        );
+        shortCodeRepositoryMock.findByShortCode.mockResolvedValue(null);
 
         const inputDto: IShortenUrlInputDTO = {
           destinationUrl: 'https://google.com.br',
