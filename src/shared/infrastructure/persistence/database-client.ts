@@ -1,6 +1,9 @@
 import { sql } from 'drizzle-orm';
 import { NodePgDatabase, drizzle } from 'drizzle-orm/node-postgres';
 import { Pool } from 'pg';
+import { lastValueFrom } from 'rxjs';
+
+import { retryAsyncFunction } from '../../utils/misc.utils';
 
 export class DatabaseClient<DbSchema extends Record<string, unknown> = any> {
   connection: NodePgDatabase<DbSchema>;
@@ -8,7 +11,10 @@ export class DatabaseClient<DbSchema extends Record<string, unknown> = any> {
 
   private constructor() {}
 
-  async isConnected(): Promise<
+  async isConnected(params: {
+    retryAttempts: number;
+    retryDelayMs: number;
+  }): Promise<
     | {
         ok: true;
       }
@@ -24,8 +30,19 @@ export class DatabaseClient<DbSchema extends Record<string, unknown> = any> {
       };
     }
 
-    try {
+    const pingConnection = async () => {
       await this.connection.execute(sql`SELECT 1`);
+    };
+
+    try {
+      await lastValueFrom(
+        retryAsyncFunction({
+          callback: pingConnection,
+          maxRetries: params.retryAttempts,
+          retryIntervalMs: params.retryDelayMs,
+        }),
+      );
+
       return {
         ok: true,
       };
@@ -63,7 +80,10 @@ export class DatabaseClient<DbSchema extends Record<string, unknown> = any> {
       logger: false,
       casing: 'snake_case',
     });
-    const isConnectionStablishResult = await dbClient.isConnected();
+    const isConnectionStablishResult = await dbClient.isConnected({
+      retryAttempts: 10,
+      retryDelayMs: 2_000,
+    });
     if (!isConnectionStablishResult.ok) {
       throw new Error('Database connection failed', {
         cause: isConnectionStablishResult.error,

@@ -14,8 +14,10 @@ export class DatabaseHealthIndicatorService {
     const indicator = this.healthIndicatorService.check('database');
 
     try {
-      const isConnectionStablishResult =
-        await this.databaseClient.isConnected();
+      const isConnectionStablishResult = await this.databaseClient.isConnected({
+        retryAttempts: 10,
+        retryDelayMs: 2_000,
+      });
       const isHealthy = isConnectionStablishResult.ok;
       if (isHealthy) {
         return indicator.up();
