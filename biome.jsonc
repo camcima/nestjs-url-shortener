@@ -45,7 +45,8 @@
       },
       "suspicious": {
         "noConsole": "info",
-        "noExplicitAny": "off" // disabled due to false positives on TypeScript generics
+        "noExplicitAny": "off", // disabled due to false positives on TypeScript generics
+        "noUnsafeDeclarationMerging": "off"
       },
       "correctness": {
         "noUnusedVariables": "info",
