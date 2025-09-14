@@ -5,7 +5,7 @@ import type { ShortCodeRepositoryPort } from '../../domain/repositories/short-co
 import { ShortCode } from '../../domain/value-objects/short-code.vo';
 import { IDatabaseClient, shortUrlDbSchema } from '../persistence';
 
-export class ShortCodeDbRepository implements ShortCodeRepositoryPort {
+export class ShortCodeRepository implements ShortCodeRepositoryPort {
   constructor(private readonly dbClient: IDatabaseClient) {}
 
   async findByShortCode(shortCode: ShortCode): Promise<ShortUrl | null> {

@@ -8,7 +8,7 @@ import { ResolveShortCodeUrlUseCase } from './application/use-cases/resolve-shor
 import { ShortenUrlUseCase } from './application/use-cases/shorten-url.use-case';
 import { ShortCodeRepositoryPort } from './domain/repositories/short-code.repository.port';
 import { UrlShortCodeGeneratorService } from './domain/services/url-short-code-generator.service';
-import { ShortCodeDbRepository } from './infrastructure/repositories/short-code.db.repository';
+import { ShortCodeRepository } from './infrastructure/repositories/short-code.db.repository';
 
 @Module({
   imports: [LoggerModule, DatabaseModule],
@@ -17,7 +17,7 @@ import { ShortCodeDbRepository } from './infrastructure/repositories/short-code.
       provide: ShortCodeRepositoryPort,
       inject: [DatabaseClient],
       useFactory: (databaseClient: DatabaseClient) => {
-        return new ShortCodeDbRepository(databaseClient);
+        return new ShortCodeRepository(databaseClient);
       },
     },
 
