@@ -1,5 +1,6 @@
+.data/
+
 .vscode/
-.cursor/
 
 # Database dump (dbmate)
 db/schema.sql

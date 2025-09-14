@@ -5,7 +5,7 @@ services:
     environment:
       POSTGRES_DB: urlshortener
       POSTGRES_USER: urlshortener
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      DB_PASSWORD: ${DB_PASSWORD}
       POSTGRES_HOST_AUTH_METHOD: trust
     ports:
       - "5432:5432"
@@ -20,8 +20,7 @@ services:
   app:
     build:
       context: .
-      dockerfile: Dockerfile
-      target: development
+      dockerfile: dev.Dockerfile
     restart: unless-stopped
     ports:
       - "3000:3000"
@@ -31,7 +30,7 @@ services:
       REST_API_APP_PORT: 3000
       DB_HOST: ep-bold-breeze-abc-pooler.us-east-2.aws.neon.tech
       DB_USER: urlshortener
-      DB_PASSWORD: ${POSTGRES_PASSWORD}
+      DB_PASSWORD: ${DB_PASSWORD}
       DB_PORT: 5432
       DB_NAME: urlshortener
       TELEMETRY_SERVICE_NAME: url-shortener
@@ -58,6 +57,32 @@ services:
         echo '🚀 Starting NestJS application...' &&
         pnpm rest/start:dev
       "
+
+  opentelemetry-collector:
+    restart: unless-stopped
+    hostname: opentelemetry-collector
+    image: otel/opentelemetry-collector:latest
+    command: ["--config=/etc/otel-collector-config.yaml"]
+    volumes:
+      - ./infra/otel-collector-config.yaml:/etc/otel-collector-config.yaml
+    ports:
+      - "4317:4317"   # OTLP gRPC receiver
+      - "4318:4318"   # OTLP HTTP receiver
+      - "9464:9464"   # Prometheus metrics endpoint
+  prometheus:
+    image: prom/prometheus:latest
+    command:
+      - --config.file=/etc/prometheus.yaml
+      - --web.enable-remote-write-receiver
+      - --enable-feature=otlp-write-receiver
+      - --enable-feature=exemplar-storage
+      - --enable-feature=native-histograms
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./infra/prometheus.yaml:/etc/prometheus.yaml
+      - ./data/prometheus-data:/prometheus
+    ports:
+      - "9090:9090"
 
 volumes:
   postgres_data:
