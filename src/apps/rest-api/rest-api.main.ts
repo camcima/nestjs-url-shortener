@@ -40,7 +40,13 @@ async function bootstrap() {
 if (require.main === module) {
   bootstrap().catch((err) => {
     const logger = new NestLogger('bootstrap');
-    logger.error('Failed to start application:', err);
+    const errorToDisplay = new Error('Failed to start application', {
+      cause: err,
+    });
+    logger.fatal(errorToDisplay);
+
+    NestLogger.flush();
+
     process.exit(1);
   });
 }

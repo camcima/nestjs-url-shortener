@@ -1,6 +1,12 @@
-import { type ArgumentsHost, Catch, ExceptionFilter } from '@nestjs/common';
+import {
+  type ArgumentsHost,
+  Catch,
+  type ExceptionFilter,
+  HttpException,
+} from '@nestjs/common';
 import { HttpAdapterHost } from '@nestjs/core';
 
+import { AppLoggerPort } from '../../../app-logger.port';
 import { DomainError } from '../../../kernel/domain/errors/domain-error.interface';
 import { ValidationError } from '../../../kernel/domain/errors/validation-error.interface';
 
@@ -9,6 +15,7 @@ type IProblemDetailsJsonBody = {
   title: string;
   status: number;
   detail?: string;
+  errors?: unknown[];
 };
 
 const HTTP_STATUS_CODE_BY_ERROR_TYPE = {
@@ -22,12 +29,41 @@ const HTTP_STATUS_CODE_BY_ERROR_TYPE = {
  */
 @Catch()
 export class CatchAllExceptionsForHttp implements ExceptionFilter {
-  constructor(private readonly httpAdapterHost: HttpAdapterHost) {}
+  constructor(
+    private readonly httpAdapterHost: HttpAdapterHost,
+    private readonly logger: AppLoggerPort,
+  ) {}
 
   catch(exception: unknown, host: ArgumentsHost): void {
+    this.logger.error(exception);
+
     const { httpAdapter } = this.httpAdapterHost;
     const ctx = host.switchToHttp();
     const response = ctx.getResponse();
+
+    if (exception instanceof HttpException) {
+      const exceptionResponse = exception.getResponse();
+      const errorData =
+        typeof exceptionResponse === 'string'
+          ? { message: exceptionResponse }
+          : exceptionResponse;
+
+      const responseBody: IProblemDetailsJsonBody = {
+        type: 'about:blank',
+        title: exception.name,
+        status: exception.getStatus(),
+        detail: exception.message,
+        errors: [errorData],
+      };
+      httpAdapter.setHeader(
+        response,
+        'Content-Type',
+        'application/problem+json',
+      );
+      httpAdapter.reply(response, responseBody, responseBody.status);
+
+      return;
+    }
 
     if (
       exception instanceof DomainError ||
